@@ -1,0 +1,60 @@
+{
+  "name": "Dabbawala Lunch Services",
+  "short_name": "Dabbawala",
+  "description": "Fresh corporate meal delivery across KL. RM15.90 fixed price. Order before 7PM daily.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1A1F3C",
+  "theme_color": "#C0392B",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "categories": [
+    "food",
+    "lifestyle",
+    "business"
+  ],
+  "shortcuts": [
+    {
+      "name": "Place Order",
+      "short_name": "Order",
+      "description": "Order your meal for tomorrow",
+      "url": "/#order",
+      "icons": [
+        {
+          "src": "/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}
