@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#1A1F3C">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Dabbawala">
+<meta name="description" content="Dabbawala Lunch Services — Homely Meals. Delivered Daily. RM15.90 per meal. All KL.">
+<title>Dabbawala Lunch Services | Corporate Meal Delivery KL</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}:root{--navy:#1A1F3C;--navyd:#0F1225;--red:#C0392B;--redb:#E74C3C;--cream:#FDF6EC;--grey:#6B7280;--white:#fff;--dark:#111827;--sh:0 4px 24px rgba(26,31,60,.1);--shl:0 16px 48px rgba(26,31,60,.18)}html{scroll-behavior:smooth}body{font-family:'DM Sans',sans-serif;background:#fff;color:var(--dark);overflow-x:hidden}nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(26,31,60,.97);backdrop-filter:blur(16px);height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 4%;border-bottom:2px solid var(--red)}.nl{padding:7px 12px;border-radius:8px;font-size:.78rem;font-weight:600;color:rgba(255,255,255,.55);cursor:pointer;transition:.2s;border:none;background:none}.nl:hover,.nl.active{color:#fff;background:rgba(192,57,43,.25)}.nav-cta{padding:9px 18px;background:var(--red);color:#fff;border:none;border-radius:10px;font-weight:700;font-size:.8rem;cursor:pointer;transition:.2s}section{padding-top:62px}.hero{background:var(--navyd);min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:80px 5% 60px;position:relative;overflow:hidden}.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 15% 50%,rgba(192,57,43,.12),transparent 50%)}.hero-red-bar{position:absolute;top:0;left:0;right:0;height:4px;background:var(--red)}.hero-content{position:relative;z-index:2;max-width:640px}.hero-logo{margin-bottom:24px}.badge{display:inline-flex;align-items:center;gap:8px;background:rgba(192,57,43,.2);border:1px solid rgba(192,57,43,.4);border-radius:30px;padding:5px 14px;margin-bottom:18px}.badge span{font-size:.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#F5A623}.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,5.5vw,3.5rem);font-weight:900;color:#fff;line-height:1.15;margin-bottom:14px}.hero h1 em{font-style:italic;color:var(--redb)}.hero-sub{font-size:.93rem;color:rgba(255,255,255,.6);line-height:1.85;margin-bottom:26px;max-width:500px}.hero-sub strong{color:#F5A623}.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}.btn-red{padding:13px 26px;background:var(--red);color:#fff;border:none;border-radius:12px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.93rem;cursor:pointer;box-shadow:0 8px 24px rgba(192,57,43,.4);transition:.25s;display:inline-flex;align-items:center;gap:8px}.btn-red:hover{background:var(--redb);transform:translateY(-2px)}.btn-ghost{padding:13px 26px;background:transparent;color:rgba(255,255,255,.8);border:1.5px solid rgba(255,255,255,.2);border-radius:12px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.93rem;cursor:pointer;transition:.25s}.btn-ghost:hover{border-color:var(--red);color:#fff}.hero-stats{display:flex;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden}.hs{flex:1;padding:18px 12px;text-align:center;border-right:1px solid rgba(255,255,255,.06)}.hs:last-child{border-right:none}.hs-val{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--redb);letter-spacing:1px;line-height:1}.hs-lbl{font-size:.6rem;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:1.5px;margin-top:4px}.food-float{position:absolute;right:5%;top:50%;transform:translateY(-50%);display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:768px){.food-float{display:none}}.fp{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:12px 16px;display:flex;align-items:center;gap:9px;animation:fp 4s ease-in-out infinite}.fp:nth-child(2){animation-delay:.6s}.fp:nth-child(3){animation-delay:1.2s}.fp:nth-child(4){animation-delay:1.8s}@keyframes fp{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}.fp-icon{font-size:1.6rem}.fp-name{font-size:.72rem;font-weight:600;color:rgba(255,255,255,.75)}.about-sec{background:var(--cream);padding:80px 5%}.sec-lbl{font-size:.68rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:10px;display:flex;align-items:center;gap:8px}.sec-lbl::before{content:'';width:18px;height:2px;background:var(--red);border-radius:2px}.sec-title{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:var(--navy);line-height:1.2;margin-bottom:12px}.sec-title em{font-style:italic;color:var(--red)}.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start;margin-top:40px}@media(max-width:768px){.about-grid{grid-template-columns:1fr;gap:28px}}.about-left p{font-size:.92rem;line-height:1.9;color:var(--grey);margin-bottom:14px}.about-left p strong{color:var(--navy)}.about-quote{background:var(--navy);border-radius:14px;padding:22px 24px;margin-top:16px;border-left:4px solid var(--red)}.about-quote p{font-family:'Playfair Display',serif;font-style:italic;font-size:.93rem;color:rgba(255,255,255,.88);line-height:1.75}.af{background:#fff;border-radius:12px;padding:16px 18px;box-shadow:var(--sh);display:flex;align-items:flex-start;gap:12px;border-left:3px solid transparent;transition:.2s;margin-bottom:10px}.af:hover{border-left-color:var(--red);transform:translateX(3px)}.af-ico{width:38px;height:38px;background:linear-gradient(135deg,var(--red),var(--redb));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}.af-title{font-size:.85rem;font-weight:700;color:var(--navy);margin-bottom:2px}.af-desc{font-size:.75rem;color:var(--grey);line-height:1.5}.how-sec{background:var(--navy);padding:80px 5%;position:relative;overflow:hidden}.how-sec .sec-lbl{color:#F5A623}.how-sec .sec-lbl::before{background:#F5A623}.how-sec .sec-title{color:#fff}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}@media(max-width:768px){.steps{grid-template-columns:1fr}}.step{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:15px;padding:22px;position:relative;overflow:hidden;transition:.2s}.step:hover{background:rgba(192,57,43,.1);border-color:rgba(192,57,43,.3)}.step-bg{position:absolute;top:10px;right:14px;font-family:'Bebas Neue',sans-serif;font-size:3.8rem;color:rgba(255,255,255,.04);line-height:1}.step-ico{font-size:1.8rem;margin-bottom:11px}.step h3{font-family:'Playfair Display',serif;font-size:.96rem;font-weight:700;color:#fff;margin-bottom:7px}.step p{font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.7}.step p strong{color:#F5A623}.stats-strip{display:grid;grid-template-columns:repeat(4,1fr);background:rgba(192,57,43,.12);border:1px solid rgba(192,57,43,.22);border-radius:12px;overflow:hidden;margin-top:32px}.ss{padding:18px 12px;text-align:center;border-right:1px solid rgba(255,255,255,.05)}.ss:last-child{border-right:none}.ss-val{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--redb);letter-spacing:1px;line-height:1}.ss-lbl{font-size:.6rem;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:1.5px;margin-top:4px}.menu-sec{background:#fff;padding:80px 5%}.mcats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}@media(max-width:768px){.mcats{grid-template-columns:1fr}}.mcat{border-radius:15px;overflow:hidden;box-shadow:var(--shl)}.mcat-top{padding:26px 20px;text-align:center}.mcat-top.rice{background:linear-gradient(135deg,#7B1D0E,#C04B1A)}.mcat-top.west{background:linear-gradient(135deg,#1A2E1A,#4A6741)}.mcat-top.heal{background:linear-gradient(135deg,#0A1F35,#1A5276)}.mcat-ico{font-size:2.5rem;display:block;margin-bottom:10px;filter:drop-shadow(0 3px 6px rgba(0,0,0,.3))}.mcat-top h3{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:#fff;margin-bottom:5px}.mcat-top p{font-size:.75rem;color:rgba(255,255,255,.7);line-height:1.5}.mcat-body{background:var(--cream);padding:14px 18px}.mcat-tag{display:inline-block;padding:3px 11px;border-radius:18px;font-size:.64rem;font-weight:700;letter-spacing:.5px;margin-bottom:9px}.mcat-tag.rice{background:rgba(192,75,26,.12);color:#B83A1F}.mcat-tag.west{background:rgba(74,103,65,.12);color:#2E4A28}.mcat-tag.heal{background:rgba(26,82,118,.12);color:#1A4A6B}.mcat-item{display:flex;align-items:center;gap:7px;padding:5px 0;border-bottom:1px solid rgba(0,0,0,.05);font-size:.78rem;color:var(--grey)}.mcat-item:last-child{border-bottom:none}.mcat-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0}.dot-r{background:#B83A1F}.dot-w{background:#4A6741}.dot-h{background:#1A5276}.price-callout{background:var(--navy);border-radius:15px;padding:26px 32px;display:flex;align-items:center;justify-content:space-between;margin-top:28px;gap:16px;flex-wrap:wrap;border-left:5px solid var(--red)}.pc-text h3{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:5px}.pc-text p{font-size:.78rem;color:rgba(255,255,255,.45)}.pc-val{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:var(--redb);letter-spacing:2px;line-height:1}.pc-sub{font-size:.68rem;color:rgba(255,255,255,.3);text-align:right;margin-top:2px}.why-sec{background:var(--cream);padding:80px 5%}.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:40px}@media(max-width:768px){.why-grid{grid-template-columns:1fr}}.why-card{background:#fff;border-radius:12px;padding:19px;box-shadow:var(--sh);border-top:3px solid var(--red);transition:.2s}.why-card:hover{transform:translateY(-3px);box-shadow:var(--shl)}.why-ico{font-size:1.4rem;margin-bottom:8px}.why-title{font-size:.86rem;font-weight:700;color:var(--navy);margin-bottom:4px}.why-desc{font-size:.75rem;color:var(--grey);line-height:1.6}.cta-banner{background:linear-gradient(135deg,var(--red),#a93226);border-radius:13px;padding:24px 28px;display:flex;align-items:center;justify-content:space-between;margin-top:28px;gap:12px;flex-wrap:wrap}.cta-banner h3{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;color:#fff;margin-bottom:4px}.cta-banner p{font-size:.78rem;color:rgba(255,255,255,.8)}.cta-banner button{padding:10px 20px;background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.4);color:#fff;border-radius:28px;font-weight:700;font-size:.78rem;cursor:pointer;transition:.2s}.order-sec{background:#fff;padding:80px 5% 60px}.cutoff-bar{background:var(--navy);border-radius:12px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;gap:10px;flex-wrap:wrap}.cb-dot{width:9px;height:9px;border-radius:50%;background:#22c55e;animation:pulse 2s infinite;flex-shrink:0}@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}.cb-txt strong{display:block;font-size:.84rem;color:#fff;font-weight:700}.cb-txt span{font-size:.7rem;color:rgba(255,255,255,.4)}.cb-timer{font-family:'Bebas Neue',sans-serif;font-size:1.55rem;color:var(--redb);letter-spacing:3px}.cb-timer.urgent{color:#ef4444;animation:blink 1s infinite}@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}.repeat-banner{background:linear-gradient(135deg,var(--navy),#2a3060);border-radius:11px;padding:13px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;gap:10px;border:1px solid rgba(192,57,43,.3)}.repeat-text strong{display:block;color:#F5A623;font-size:.86rem;margin-bottom:2px}.repeat-text span{font-size:.78rem;color:rgba(255,255,255,.7)}.repeat-btn{padding:8px 15px;background:var(--red);color:#fff;border:none;border-radius:9px;font-weight:700;font-size:.76rem;cursor:pointer;white-space:nowrap;flex-shrink:0}.order-layout{display:grid;grid-template-columns:1fr 305px;gap:22px;align-items:start}@media(max-width:900px){.order-layout{grid-template-columns:1fr}}.form-card{background:var(--cream);border-radius:15px;padding:22px;margin-bottom:18px;border:1px solid rgba(0,0,0,.07)}.form-card-title{font-family:'Playfair Display',serif;font-size:.98rem;font-weight:700;color:var(--navy);margin-bottom:15px;display:flex;align-items:center;gap:8px}.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:11px}.fg label{font-size:.66rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--grey)}.fg input{padding:10px 13px;border:1.5px solid rgba(0,0,0,.1);border-radius:9px;font-family:'DM Sans',sans-serif;font-size:.86rem;color:var(--dark);background:#fff;transition:.2s;outline:none}.fg input:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(192,57,43,.1)}.fg input::placeholder{color:rgba(107,114,128,.5)}.form-2col{display:grid;grid-template-columns:1fr 1fr;gap:11px}@media(max-width:600px){.form-2col{grid-template-columns:1fr}}.week-tabs{display:flex;gap:5px;margin-bottom:14px;background:#fff;padding:4px;border-radius:10px;border:1px solid rgba(0,0,0,.08)}.wtab{flex:1;padding:8px;border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.78rem;cursor:pointer;transition:.2s;background:transparent;color:var(--grey)}.wtab.active{background:var(--navy);color:#fff}.day-strip{display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}.day-strip::-webkit-scrollbar{display:none}.dbtn{flex-shrink:0;padding:8px 13px;border:1.5px solid rgba(0,0,0,.09);border-radius:9px;background:#fff;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.76rem;color:var(--grey);cursor:pointer;transition:.2s;text-align:center;min-width:66px}.dbtn.active{background:var(--navy);border-color:var(--navy);color:#fff}.dbtn.deliv-day{border-color:#22c55e;background:rgba(34,197,94,.08)}.dbtn.active.deliv-day{background:var(--navy);border-color:#22c55e}.dbtn-name{display:block;font-size:.84rem}.dbtn-date{display:block;font-size:.6rem;opacity:.6;margin-top:1px}.meal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}@media(max-width:600px){.meal-grid{grid-template-columns:1fr}}.mc{position:relative;border-radius:13px;overflow:hidden;cursor:pointer;border:2.5px solid transparent;transition:.25s;background:#fff;box-shadow:0 3px 12px rgba(0,0,0,.1)}.mc:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.15)}.mc:hover .mv-photo img{transform:scale(1.05)}.mc.sel{border-color:var(--red);box-shadow:0 0 0 4px rgba(192,57,43,.15)}.mc.sel .mchk{opacity:1;transform:scale(1)}.mchk{position:absolute;top:7px;right:7px;width:21px;height:21px;border-radius:50%;background:var(--red);color:#fff;font-size:.68rem;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.5);transition:.2s;z-index:2;font-weight:700}.mv{height:82px;display:flex;align-items:center;justify-content:center;font-size:2.3rem;position:relative;overflow:hidden}.mv.rb{background:linear-gradient(135deg,#7B1D0E,#C04B1A)}.mv.wb{background:linear-gradient(135deg,#1A2E1A,#4A6741)}.mv.hb{background:linear-gradient(135deg,#0A1F35,#1A5276)}.mv::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 40%,rgba(255,255,255,.15),transparent 60%)}.mvi{position:relative;z-index:1;filter:drop-shadow(0 3px 6px rgba(0,0,0,.3));animation:wob 3s ease-in-out infinite}@keyframes wob{0%,100%{transform:rotate(-3deg) scale(1)}50%{transform:rotate(3deg) scale(1.05)}}.mb{padding:10px 11px 12px}.mn{font-size:.77rem;font-weight:700;color:var(--navy);line-height:1.3;margin-bottom:2px}.mtag{display:inline-block;padding:2px 7px;border-radius:8px;font-size:.58rem;font-weight:600;margin-top:3px}.mtag.rice{background:rgba(192,75,26,.1);color:#B83A1F}.mtag.west{background:rgba(74,103,65,.1);color:#2E4A28}.mtag.heal{background:rgba(26,82,118,.1);color:#1A4A6B}.mp{font-size:.82rem;font-weight:700;color:var(--red);margin-top:5px}.qty-row{display:flex;align-items:center;gap:8px;margin-top:8px}.ql{font-size:.75rem;font-weight:600;color:var(--grey)}.qc{display:flex;align-items:center;border:1.5px solid rgba(0,0,0,.1);border-radius:9px;overflow:hidden;background:#fff}.qb{width:29px;height:29px;border:none;background:transparent;cursor:pointer;font-size:.95rem;font-weight:700;color:var(--navy);display:flex;align-items:center;justify-content:center;transition:.15s}.qb:hover{background:var(--red);color:#fff}.qn{width:35px;height:29px;text-align:center;border:none;border-left:1px solid rgba(0,0,0,.08);border-right:1px solid rgba(0,0,0,.08);font-family:'DM Sans',sans-serif;font-weight:700;font-size:.88rem;background:#fff;color:var(--dark)}.qn::-webkit-outer-spin-button,.qn::-webkit-inner-spin-button{-webkit-appearance:none}.order-sum{background:var(--navy);border-radius:15px;padding:20px;position:sticky;top:76px}.os-title{font-family:'Playfair Display',serif;font-size:.96rem;color:#fff;font-weight:700;margin-bottom:13px;display:flex;align-items:center;gap:7px}.os-empty{text-align:center;padding:22px 0;color:rgba(255,255,255,.3);font-size:.78rem}.os-empty-ico{font-size:1.7rem;display:block;margin-bottom:6px;opacity:.3}.os-item{padding:10px 0;border-bottom:1px solid rgba(255,255,255,.07)}.os-meal{font-size:.79rem;color:#fff;font-weight:600;line-height:1.3}.os-meta{font-size:.67rem;color:rgba(255,255,255,.4);margin-top:1px}.os-price{font-size:.79rem;font-weight:700;color:#F5A623;float:right}.os-total{display:flex;justify-content:space-between;align-items:center;margin-top:11px;padding-top:11px;border-top:1px solid rgba(255,255,255,.1)}.os-total-lbl{font-size:.72rem;font-weight:600;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:1px}.os-total-val{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;color:var(--redb)}.os-note{font-size:.66rem;color:rgba(255,255,255,.27);margin-top:7px;text-align:center;line-height:1.5}.submit-btn{width:100%;margin-top:11px;padding:13px;border:none;border-radius:11px;background:var(--red);color:#fff;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.88rem;cursor:pointer;transition:.25s;box-shadow:0 8px 24px rgba(192,57,43,.4);display:flex;align-items:center;justify-content:center;gap:8px}.submit-btn:hover:not(:disabled){background:var(--redb);transform:translateY(-1px)}.submit-btn:disabled{opacity:.45;cursor:not-allowed;transform:none}.spin{width:15px;height:15px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;display:none}@keyframes sp{to{transform:rotate(360deg)}}.feedback-sec{background:var(--cream);padding:70px 5%}.star-row{display:flex;gap:8px;margin:14px 0}.star{font-size:1.9rem;cursor:pointer;transition:.2s;filter:grayscale(1);opacity:.4}.star.active,.star:hover{filter:none;opacity:1;transform:scale(1.1)}.feedback-form{background:#fff;border-radius:13px;padding:20px;box-shadow:var(--sh);max-width:580px;margin-top:18px}.feedback-form textarea{width:100%;padding:10px 13px;border:1.5px solid rgba(0,0,0,.1);border-radius:9px;font-family:'DM Sans',sans-serif;font-size:.84rem;color:var(--dark);resize:vertical;min-height:78px;outline:none;margin-top:8px}.feedback-form textarea:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(192,57,43,.1)}footer{background:var(--navyd);border-top:3px solid var(--red);padding:46px 5% 26px}.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:34px;margin-bottom:30px}@media(max-width:768px){.footer-grid{grid-template-columns:1fr}}.footer-logo img{height:48px;object-fit:contain;max-width:185px;margin-bottom:11px}.footer-tag{font-size:.79rem;color:rgba(255,255,255,.4);line-height:1.8}.footer-col h4{font-size:.66rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.28);margin-bottom:11px}.footer-col a,.footer-col p{font-size:.79rem;color:rgba(255,255,255,.5);line-height:2.2;display:block;text-decoration:none;cursor:pointer;transition:.2s}.footer-col a:hover{color:var(--redb)}.footer-bottom{border-top:1px solid rgba(255,255,255,.06);padding-top:17px;text-align:center;font-size:.71rem;color:rgba(255,255,255,.2)}.bot-nav{display:none;position:fixed;bottom:0;left:0;right:0;z-index:99;background:rgba(26,31,60,.97);backdrop-filter:blur(16px);border-top:2px solid var(--red);padding:8px 0 max(8px,env(safe-area-inset-bottom))}@media(max-width:768px){.bot-nav{display:flex}.nav-links,.nav-cta{display:none}body{padding-bottom:62px}}.bni{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:5px;cursor:pointer;border:none;background:none}.bni-ico{font-size:1.15rem}.bni-lbl{font-size:.57rem;font-weight:600;color:rgba(255,255,255,.35);letter-spacing:.5px;text-transform:uppercase}.bni.active .bni-lbl{color:var(--redb)}.toast{position:fixed;bottom:24px;right:24px;z-index:2000;background:var(--navy);color:#fff;padding:15px 19px;border-radius:12px;display:flex;align-items:center;gap:11px;box-shadow:var(--shl);transform:translateY(120px);opacity:0;transition:all .4s cubic-bezier(.34,1.56,.64,1);border-left:4px solid var(--red);max-width:330px}.toast.show{transform:translateY(0);opacity:1}.ti{font-size:1.25rem;flex-shrink:0}.ttxt strong{display:block;font-size:.85rem;color:#F5A623;margin-bottom:2px}.ttxt span{font-size:.75rem;line-height:1.4;color:rgba(255,255,255,.7)}.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:500;display:none;align-items:center;justify-content:center;backdrop-filter:blur(6px)}.modal-bg.show{display:flex}.confirm-card{background:#fff;border-radius:18px;max-width:440px;width:92%;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.4)}.cc-head{background:linear-gradient(135deg,var(--navy),#2a3060);padding:26px;text-align:center}.cc-head-ico{font-size:2.8rem;margin-bottom:9px}.cc-head h2{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:900;color:#fff;margin-bottom:4px}.cc-head p{font-size:.78rem;color:rgba(255,255,255,.55)}.cc-body{padding:20px 24px}.cc-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(0,0,0,.07);font-size:.82rem}.cc-row:last-child{border-bottom:none}.cc-row-lbl{color:var(--grey);font-weight:500}.cc-row-val{font-weight:700;color:var(--navy);text-align:right;max-width:220px}.cc-total{background:var(--cream);border-radius:9px;padding:13px 16px;margin:12px 0;display:flex;justify-content:space-between;align-items:center;border-left:4px solid var(--red)}.cc-total-lbl{font-size:.78rem;font-weight:600;color:var(--grey)}.cc-total-val{font-family:'Playfair Display',serif;font-size:1.35rem;font-weight:900;color:var(--red)}.cc-actions{display:flex;flex-direction:column;gap:9px;padding:0 24px 24px}.cc-wa{width:100%;padding:13px;background:#25D366;color:#fff;border:none;border-radius:11px;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:.2s}.cc-wa:hover{background:#22c55e}.cc-close{width:100%;padding:11px;background:rgba(0,0,0,.06);color:var(--dark);border:none;border-radius:11px;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.86rem;cursor:pointer}.conn-pill{position:fixed;top:70px;right:12px;z-index:99;display:flex;align-items:center;gap:5px;background:rgba(26,31,60,.9);border:1px solid rgba(192,57,43,.3);border-radius:20px;padding:4px 10px;font-size:.6rem;font-weight:600;color:rgba(255,255,255,.4);backdrop-filter:blur(8px)}.cp-dot{width:5px;height:5px;border-radius:50%;background:#f59e0b;animation:pulse 1s infinite}.cp-dot.ok{background:#22c55e;animation:none}.cp-dot.err{background:#ef4444;animation:none}.install-banner{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:12px 16px;border-radius:13px;display:flex;align-items:center;gap:10px;z-index:999;box-shadow:var(--shl);max-width:320px;width:90%;border:1px solid rgba(192,57,43,.4)}.ib-txt strong{display:block;font-size:.82rem;color:#F5A623}.ib-txt span{font-size:.68rem;color:rgba(255,255,255,.5)}.ib-btn{padding:7px 12px;background:var(--red);color:#fff;border:none;border-radius:8px;font-weight:700;font-size:.74rem;cursor:pointer;white-space:nowrap}.ib-x{background:none;border:none;color:rgba(255,255,255,.3);cursor:pointer;font-size:.9rem;padding:0 2px}</style>
+</head>
+<body>
+<div class="conn-pill"><div class="cp-dot" id="cDot"></div><span id="cTxt">Connecting...</span></div>
+<div class="install-banner" id="instBanner" style="display:none">
+  <div class="ib-txt"><strong>Install Dabbawala App</strong><span>Quick daily ordering on your home screen</span></div>
+  <button class="ib-btn" id="instBtn">Install</button>
+  <button class="ib-x" onclick="document.getElementById('instBanner').style.display='none'">✕</button>
+</div>
+<nav>
+  <div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;color:#fff;letter-spacing:1px">DABBAWALA <span style="color:#E74C3C;font-style:italic">LUNCH</span><div style="font-size:.55rem;color:rgba(255,255,255,.5);font-family:DM Sans,sans-serif;font-weight:400;letter-spacing:2px;margin-top:1px">HOMELY MEALS. DELIVERED DAILY.</div></div>
+  <div class="nav-links">
+    <button class="nl active" onclick="goTo('hero')">Home</button>
+    <button class="nl" onclick="goTo('about')">About</button>
+    <button class="nl" onclick="goTo('how')">How It Works</button>
+    <button class="nl" onclick="goTo('menu')">Menu</button>
+    <button class="nl" onclick="goTo('why')">Why Us</button>
+  </div>
+  <button class="nav-cta" onclick="goTo('order')">Order Now →</button>
+</nav>
+<section id="hero" class="hero">
+  <div class="hero-red-bar"></div>
+  <div class="hero-content">
+    <div class="hero-logo"><div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;color:#fff;letter-spacing:1px">DABBAWALA <span style="color:#E74C3C;font-style:italic">LUNCH</span><div style="font-size:.55rem;color:rgba(255,255,255,.5);font-family:DM Sans,sans-serif;font-weight:400;letter-spacing:2px;margin-top:1px">HOMELY MEALS. DELIVERED DAILY.</div></div></div>
+    <div class="badge"><span>🍱 Corporate Meal Delivery · Kuala Lumpur</span></div>
+    <h1>Homely Meals.<br><em>Delivered Daily.</em></h1>
+    <p class="hero-sub">Fresh, hot corporate meals delivered to your office every day. Rice, Western or Healthy — just <strong>RM15.90 fixed per meal.</strong> Order before 7PM, delivered tomorrow morning.</p>
+    <div class="hero-btns">
+      <button class="btn-red" onclick="goTo('order')">🍱 Place Your Order</button>
+      <button class="btn-ghost" onclick="goTo('about')">Learn More →</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hs"><div class="hs-val">RM15.90</div><div class="hs-lbl">Fixed Price</div></div>
+      <div class="hs"><div class="hs-val">3</div><div class="hs-lbl">Daily Choices</div></div>
+      <div class="hs"><div class="hs-val">2 Wk</div><div class="hs-lbl">Rotation</div></div>
+      <div class="hs"><div class="hs-val">All KL</div><div class="hs-lbl">Delivery</div></div>
+    </div>
+  </div>
+  <div class="food-float">
+    <div class="fp"><div class="fp-icon">🍛</div><div><div class="fp-name">Rice Dish</div><div style="font-size:.6rem;color:rgba(255,255,255,.35)">Asian Comfort</div></div></div>
+    <div class="fp"><div class="fp-icon">🍔</div><div><div class="fp-name">Western</div><div style="font-size:.6rem;color:rgba(255,255,255,.35)">Fusion Style</div></div></div>
+    <div class="fp"><div class="fp-icon">🥗</div><div><div class="fp-name">Healthy Bowl</div><div style="font-size:.6rem;color:rgba(255,255,255,.35)">Light & Fresh</div></div></div>
+    <div class="fp"><div class="fp-icon">🚚</div><div><div class="fp-name">Office Delivery</div><div style="font-size:.6rem;color:rgba(255,255,255,.35)">All KL Areas</div></div></div>
+  </div>
+</section>
+<section id="about" class="about-sec">
+  <div class="sec-lbl">Who We Are</div>
+  <div class="sec-title">Meals that work as<br><em>hard as your team</em></div>
+  <div class="about-grid">
+    <div class="about-left">
+      <p><strong>Dabbawala Lunch Services</strong> is a structured, reliable corporate meal solution for busy offices across Kuala Lumpur.</p>
+      <p>We take the stress out of lunchtime — no queues, no guesswork, no overspending. Our pre-order system ensures every meal is freshly prepared and delivered on time.</p>
+      <p>Rotating weekly menus at a fixed price of <strong>RM15.90 per meal</strong> — one of the most affordable corporate meal programmes in KL.</p>
+      <div class="about-quote"><p>"Affordable. Predictable. Delicious. Designed for teams that move fast and eat exceptionally well."</p></div>
+    </div>
+    <div>
+      <div class="af"><div class="af-ico">💰</div><div><div class="af-title">Fixed Pricing at RM15.90</div><div class="af-desc">One flat rate, no surprises. Full transparency for HR meal budgeting.</div></div></div>
+      <div class="af"><div class="af-ico">🍽️</div><div><div class="af-title">3 Curated Choices Daily</div><div class="af-desc">Rice, Western, and Healthy — every team member fully covered.</div></div></div>
+      <div class="af"><div class="af-ico">🔄</div><div><div class="af-title">Weekly Rotating Menus</div><div class="af-desc">Two-week rotating cycles — no repeats within the same week.</div></div></div>
+      <div class="af"><div class="af-ico">🚚</div><div><div class="af-title">Direct Office Delivery</div><div class="af-desc">Freshly prepared, delivered to your office — all KL areas covered.</div></div></div>
+      <div class="af"><div class="af-ico">📞</div><div><div class="af-title">Dedicated Support</div><div class="af-desc">Your point of contact for onboarding, changes and daily ops. Always available.</div></div></div>
+    </div>
+  </div>
+</section>
+<section id="how" class="how-sec">
+  <div class="sec-lbl">The Process</div>
+  <div class="sec-title">How it <em>works</em></div>
+  <div class="steps">
+    <div class="step"><div class="step-bg">1</div><div class="step-ico">📱</div><h3>Choose Your Meal</h3><p>Browse tomorrow's menu — <strong>Rice, Western, or Healthy.</strong> New dishes weekly.</p></div>
+    <div class="step"><div class="step-bg">2</div><div class="step-ico">⏰</div><h3>Order Before 7PM</h3><p>Submit before <strong>7:00 PM daily</strong> for next-day delivery. Quick and seamless.</p></div>
+    <div class="step"><div class="step-bg">3</div><div class="step-ico">👨‍🍳</div><h3>We Prepare Fresh</h3><p>Everything cooked <strong>fresh the next morning.</strong> Never reheated.</p></div>
+    <div class="step"><div class="step-bg">4</div><div class="step-ico">🚚</div><h3>Delivered to Your Office</h3><p>Hot meals at your desk <strong>before lunchtime.</strong> No queues, no travel.</p></div>
+    <div class="step"><div class="step-bg">5</div><div class="step-ico">🧾</div><h3>Clean Company Invoice</h3><p>HR gets a <strong>monthly invoice</strong> grouped by company — easy for finance.</p></div>
+    <div class="step"><div class="step-bg">6</div><div class="step-ico">🔁</div><h3>Repeat Daily</h3><p>Same simple process every day. Your team eats well, <strong>you save time.</strong></p></div>
+  </div>
+  <div class="stats-strip">
+    <div class="ss"><div class="ss-val">RM15.90</div><div class="ss-lbl">Per Meal</div></div>
+    <div class="ss"><div class="ss-val">3</div><div class="ss-lbl">Daily Options</div></div>
+    <div class="ss"><div class="ss-val">7 PM</div><div class="ss-lbl">Cutoff</div></div>
+    <div class="ss"><div class="ss-val">All KL</div><div class="ss-lbl">Coverage</div></div>
+  </div>
+</section>
+<section id="menu" class="menu-sec">
+  <div class="sec-lbl">What's on the Menu</div>
+  <div class="sec-title">Three categories,<br><em>every single day</em></div>
+  <div class="mcats">
+    <div class="mcat"><div class="mcat-top rice"><span class="mcat-ico">🍛</span><h3>Rice Dish</h3><p>Comfort-focused Asian meals. Hearty and satisfying.</p></div><div class="mcat-body"><div class="mcat-tag rice">Asian Comfort</div><div class="mcat-item"><div class="mcat-dot dot-r"></div>Crispy Fried Chicken Rice</div><div class="mcat-item"><div class="mcat-dot dot-r"></div>Chicken & Mutton Biryani</div><div class="mcat-item"><div class="mcat-dot dot-r"></div>Korean Gochujang Chicken Rice</div><div class="mcat-item"><div class="mcat-dot dot-r"></div>Sambal & Butter Chicken Rice</div></div></div>
+    <div class="mcat"><div class="mcat-top west"><span class="mcat-ico">🍔</span><h3>Western Dish</h3><p>Pasta, burgers, wraps & fusion favourites.</p></div><div class="mcat-body"><div class="mcat-tag west">Fusion & Western</div><div class="mcat-item"><div class="mcat-dot dot-w"></div>Creamy Chicken Pasta</div><div class="mcat-item"><div class="mcat-dot dot-w"></div>Beef Smash Burger + Fries</div><div class="mcat-item"><div class="mcat-dot dot-w"></div>BBQ Chicken Wrap</div><div class="mcat-item"><div class="mcat-dot dot-w"></div>Aglio Olio · Kofta Curry</div></div></div>
+    <div class="mcat"><div class="mcat-top heal"><span class="mcat-ico">🥗</span><h3>Healthy Option</h3><p>Balanced bowls for health-conscious professionals.</p></div><div class="mcat-body"><div class="mcat-tag heal">Balanced & Light</div><div class="mcat-item"><div class="mcat-dot dot-h"></div>Grilled Chicken Healthy Bowl</div><div class="mcat-item"><div class="mcat-dot dot-h"></div>Teriyaki Quinoa Bowl</div><div class="mcat-item"><div class="mcat-dot dot-h"></div>Lemon Herb Chicken Bowl</div><div class="mcat-item"><div class="mcat-dot dot-h"></div>Low Carb Chicken Veg Bowl</div></div></div>
+  </div>
+  <div class="price-callout">
+    <div class="pc-text"><h3>One flat price. Every meal. Every day.</h3><p>No hidden costs — predictable rate for your whole team.</p></div>
+    <div><div class="pc-val">RM15.90</div><div class="pc-sub">per meal · per person</div></div>
+  </div>
+</section>
+<section id="why" class="why-sec">
+  <div class="sec-lbl">Why Dabbawala</div>
+  <div class="sec-title">Why companies<br><em>choose us</em></div>
+  <div class="why-grid">
+    <div class="why-card"><div class="why-ico">💼</div><div class="why-title">Built for Corporate Teams</div><div class="why-desc">Pricing, ordering, delivery — all designed for offices and HR managers.</div></div>
+    <div class="why-card"><div class="why-ico">📊</div><div class="why-title">Affordable & Predictable</div><div class="why-desc">RM15.90 fixed per meal. Plan allowances with zero uncertainty.</div></div>
+    <div class="why-card"><div class="why-ico">🚀</div><div class="why-title">Reliable Delivery</div><div class="why-desc">Our pre-order system eliminates chaos. Every meal confirmed and delivered on time.</div></div>
+    <div class="why-card"><div class="why-ico">🌍</div><div class="why-title">Menu for Everyone</div><div class="why-desc">Rice, Western, and Healthy daily — every team member fully catered for.</div></div>
+    <div class="why-card"><div class="why-ico">🔁</div><div class="why-title">No Menu Fatigue</div><div class="why-desc">Two-week rotating schedule keeps it fresh. Employees look forward to lunch.</div></div>
+    <div class="why-card"><div class="why-ico">📞</div><div class="why-title">Get Started Today</div><div class="why-desc">Call 011 2679 4152 — your team ordering within 24 hours. No paperwork.</div></div>
+  </div>
+  <div class="cta-banner">
+    <div><h3>📞 Ready to bring Dabbawala to your office?</h3><p>Call or WhatsApp us — we'll onboard your team within 24 hours. No hassle.</p></div>
+    <button onclick="window.open('https://wa.me/601126794152?text=Hi+Dabbawala!+I+want+to+bring+your+meal+service+to+my+office.')">💬 WhatsApp Us</button>
+  </div>
+</section>
+<section id="order" class="order-sec">
+  <div class="sec-lbl">Place Your Order</div>
+  <div class="sec-title">Order your <em><span id="heroDay">tomorrow's</span></em> lunch</div>
+  
+  <div id="weekendNotice" style="display:none;background:linear-gradient(135deg,#1A1F3C,#2a3060);border:1px solid rgba(232,112,10,.4);border-radius:12px;padding:14px 18px;margin-top:18px;align-items:center;gap:12px;flex-wrap:wrap">
+    <span style="font-size:1.4rem">🌴</span>
+    <div>
+      <div style="font-size:.86rem;font-weight:700;color:#F5A623">Weekend — No Delivery on Saturday & Sunday</div>
+      <div style="font-size:.76rem;color:rgba(255,255,255,.6);margin-top:2px">You can still order now! Your meal will be delivered on the next working day (Monday).</div>
+    </div>
+  </div>
+
+  <div class="cutoff-bar" style="margin-top:22px">
+    <div style="display:flex;align-items:center;gap:9px">
+      <div class="cb-dot"></div>
+      <div class="cb-txt">
+        <strong>Delivering to: <span id="delivDate">Tomorrow</span></strong>
+        <span id="cbSub">Submit before today 7:00 PM</span>
+      </div>
+    </div>
+    <div class="cb-timer" id="countdown">--:--:--</div>
+  </div>
+  <div class="repeat-banner" id="repeatBanner" style="display:none;margin-top:14px">
+    <div class="repeat-text"><strong>🔁 Repeat Your Last Order</strong><span id="repeatDesc">Your previous order is saved</span></div>
+    <button class="repeat-btn" onclick="repeatOrder()">Order Same Again →</button>
+  </div>
+  <div class="order-layout" style="margin-top:22px">
+    <div>
+      <div class="form-card">
+        <div class="form-card-title"><span>👤</span> Your Details</div>
+        <div class="form-2col">
+          <div class="fg"><label>Full Name *</label><input type="text" id="empName" placeholder="Ahmad Razif"></div>
+          <div class="fg"><label>Employee ID</label><input type="text" id="empId" placeholder="EMP-0042"></div>
+        </div>
+        <div class="form-2col">
+          <div class="fg"><label>Company *</label><input type="text" id="company" placeholder="Nexus Tech Sdn Bhd"></div>
+          <div class="fg"><label>Department / Floor</label><input type="text" id="dept" placeholder="Level 5, HR"></div>
+        </div>
+        <div class="form-2col">
+          <div class="fg"><label>WhatsApp Number *</label><input type="tel" id="phone" placeholder="012-3456789"></div>
+          <div class="fg"><label>Special Instructions</label><input type="text" id="notes" placeholder="No peanuts..."></div>
+        </div>
+      </div>
+      <div class="form-card">
+        <div class="form-card-title"><span>🍽️</span> Select Your Meal</div>
+        <div class="week-tabs">
+          <button class="wtab active" onclick="setWeek(1,this)">Week 1 Menu</button>
+          <button class="wtab" onclick="setWeek(2,this)">Week 2 Menu</button>
+        </div>
+        <div class="day-strip" id="dayStrip"></div>
+        <div class="meal-grid" id="mealGrid"></div>
+        <div class="qty-row" id="qtyRow" style="display:none">
+          <span class="ql">Quantity:</span>
+          <div class="qc">
+            <button class="qb" onclick="changeQty(-1)">−</button>
+            <input class="qn" type="number" id="qtyInput" value="1" min="1" max="50" readonly>
+            <button class="qb" onclick="changeQty(1)">+</button>
+          </div>
+          <span style="font-size:.7rem;color:var(--grey);margin-left:6px">max 50 meals</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="order-sum">
+        <div class="os-title">🧾 Order Summary</div>
+        <div id="sumContent"><div class="os-empty"><span class="os-empty-ico">🍱</span>Select a meal to begin</div></div>
+        <p class="os-note" id="osNote" style="display:none">Includes packaging & delivery.</p>
+        <button class="submit-btn" id="submitBtn" onclick="submitOrder()" disabled>
+          <span id="submitLbl">Place Order →</span>
+          <div class="spin" id="spinner"></div>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="feedback" class="feedback-sec">
+  <div class="sec-lbl">Customer Feedback</div>
+  <div class="sec-title">How was your <em>meal today?</em></div>
+  <p style="color:var(--grey);font-size:.88rem;margin-top:8px;max-width:500px">Help us improve. Your feedback goes directly to our kitchen team.</p>
+  <div class="feedback-form">
+    <label style="font-size:.73rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--grey)">Rate Your Meal</label>
+    <div class="star-row" id="starRow">
+      <span class="star" onclick="setStar(1)">⭐</span>
+      <span class="star" onclick="setStar(2)">⭐</span>
+      <span class="star" onclick="setStar(3)">⭐</span>
+      <span class="star" onclick="setStar(4)">⭐</span>
+      <span class="star" onclick="setStar(5)">⭐</span>
+    </div>
+    <div class="form-2col" style="margin-top:10px">
+      <div class="fg"><label>Your Name</label><input type="text" id="fbName" placeholder="Ahmad"></div>
+      <div class="fg"><label>Company</label><input type="text" id="fbCompany" placeholder="Nexus Tech"></div>
+    </div>
+    <label style="font-size:.68rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--grey);margin-top:4px;display:block">Your Feedback</label>
+    <textarea id="fbComment" placeholder="Tell us what you loved or how we can improve..."></textarea>
+    <button class="btn-red" style="margin-top:12px;padding:11px 22px;font-size:.84rem" onclick="submitFeedback()">Submit Feedback →</button>
+  </div>
+</section>
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo"><div style="font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;color:#fff;letter-spacing:1px">DABBAWALA <span style="color:#E74C3C;font-style:italic">LUNCH</span><div style="font-size:.55rem;color:rgba(255,255,255,.5);font-family:DM Sans,sans-serif;font-weight:400;letter-spacing:2px;margin-top:1px">HOMELY MEALS. DELIVERED DAILY.</div></div></div>
+      <p class="footer-tag">Homely Meals. Delivered Daily.<br>Freshly Prepared · Reliably Delivered<br>Kuala Lumpur, Malaysia</p>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <a onclick="goTo('about')">About Us</a>
+      <a onclick="goTo('how')">How It Works</a>
+      <a onclick="goTo('menu')">View Menu</a>
+      <a onclick="goTo('why')">Why Dabbawala</a>
+      <a onclick="goTo('order')">Place Order</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact Us</h4>
+      <p>📞 011 2679 4152</p>
+      <p>💬 WhatsApp us anytime</p>
+      <p>📍 Kuala Lumpur, Malaysia</p>
+      <p>⏰ Orders close 7:00 PM daily</p>
+      <p>💰 RM15.90 per meal, fixed</p>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 Dabbawala Lunch Services · All Rights Reserved · Homely Meals. Delivered Daily.</div>
+</footer>
+<div class="bot-nav">
+  <button class="bni active" id="bn-hero" onclick="goTo('hero')"><span class="bni-ico">🏠</span><span class="bni-lbl">Home</span></button>
+  <button class="bni" id="bn-about" onclick="goTo('about')"><span class="bni-ico">ℹ️</span><span class="bni-lbl">About</span></button>
+  <button class="bni" id="bn-menu" onclick="goTo('menu')"><span class="bni-ico">🍽️</span><span class="bni-lbl">Menu</span></button>
+  <button class="bni" id="bn-feedback" onclick="goTo('feedback')"><span class="bni-ico">⭐</span><span class="bni-lbl">Rate</span></button>
+  <button class="bni" id="bn-order" onclick="goTo('order')"><span class="bni-ico">🛒</span><span class="bni-lbl">Order</span></button>
+</div>
+<div class="toast" id="toast"><span class="ti">✅</span><div class="ttxt"><strong id="toastTitle">Order Confirmed! 🎉</strong><span id="toastMsg"></span></div></div>
+<div class="modal-bg" id="confirmModal">
+  <div class="confirm-card">
+    <div class="cc-head"><div class="cc-head-ico">🍱</div><h2>Order Confirmed!</h2><p id="ccOrderId">Order #000000</p></div>
+    <div class="cc-body">
+      <div class="cc-row"><span class="cc-row-lbl">Customer</span><span class="cc-row-val" id="ccName">—</span></div>
+      <div class="cc-row"><span class="cc-row-lbl">Company</span><span class="cc-row-val" id="ccCompany">—</span></div>
+      <div class="cc-row"><span class="cc-row-lbl">Meal</span><span class="cc-row-val" id="ccMeal">—</span></div>
+      <div class="cc-row"><span class="cc-row-lbl">Quantity</span><span class="cc-row-val" id="ccQty">—</span></div>
+      <div class="cc-row"><span class="cc-row-lbl">Delivery Date</span><span class="cc-row-val" id="ccDate">—</span></div>
+      <div class="cc-total"><span class="cc-total-lbl">Total Amount</span><span class="cc-total-val" id="ccTotal">RM 0.00</span></div>
+    </div>
+    <div class="cc-actions">
+      <button class="cc-wa" id="ccWaBtn">💬 Send Confirmation via WhatsApp</button>
+      <button class="cc-close" onclick="document.getElementById('confirmModal').classList.remove('show')">Close Receipt</button>
+      <button id="ccCancelBtn" style="width:100%;padding:11px;background:rgba(239,68,68,.1);color:#ef4444;border:1px solid rgba(239,68,68,.3);border-radius:11px;font-family:DM Sans,sans-serif;font-weight:600;font-size:.84rem;cursor:pointer;margin-top:4px">❌ Cancel This Order</button>
+      <div id="ccCancelTimer" style="text-align:center;font-size:.7rem;color:rgba(0,0,0,.4);margin-top:4px">You can cancel within 30 minutes of ordering</div>
+    </div>
+  </div>
+</div><script>
+// All UI functions - regular script, accessible from HTML onclick handlers
+function goTo(id){
+  var el=document.getElementById(id);
+  if(!el)return;
+  var y=el.getBoundingClientRect().top+window.pageYOffset-70;
+  window.scrollTo({top:y,behavior:'smooth'});
+  document.querySelectorAll('.nl,.bni').forEach(function(e){e.classList.remove('active');});
+  var nl=document.querySelector('.nl[onclick*="'+id+'"]');if(nl)nl.classList.add('active');
+  var bn=document.getElementById('bn-'+id);if(bn)bn.classList.add('active');
+}
+
+var M={
+  1:[
+    {day:'Monday',rice:'Crispy Fried Chicken Rice',western:'Creamy Chicken Pasta',healthy:'Grilled Chicken Healthy Bowl'},
+    {day:'Tuesday',rice:'Chicken Biryani',western:'Spicy Aglio Olio Chicken Pasta',healthy:'Teriyaki Chicken Salad Bowl'},
+    {day:'Wednesday',rice:'Korean Gochujang Chicken Rice',western:'Chicken Burger + Fries',healthy:'Lemon Herb Chicken Bowl'},
+    {day:'Thursday',rice:'Sambal Chicken Rice',western:'Butter Chicken Naan + Gulab Jamun',healthy:'Honey Soy Chicken Healthy Bowl'},
+    {day:'Friday',rice:'Mutton Biryani',western:'BBQ Chicken Wrap',healthy:'Low Carb Chicken Veg Bowl'}
+  ],
+  2:[
+    {day:'Monday',rice:'Butter Chicken Rice',western:'Beef Burger + Fries',healthy:'Greek Chicken Salad Bowl'},
+    {day:'Tuesday',rice:'Spicy Chicken Sambal Rice',western:'Creamy Cajun Chicken Pasta',healthy:'Teriyaki Chicken Quinoa Bowl'},
+    {day:'Wednesday',rice:'Chicken Biryani',western:'Beef Kofta Curry + Rice',healthy:'Lemon Herb Grilled Chicken Bowl'},
+    {day:'Thursday',rice:'Crispy Fried Chicken Rice',western:'Beef Smash Burger Wrap',healthy:'Creamy Mushroom Chicken Bowl'},
+    {day:'Friday',rice:'Mutton Biryani',western:'BBQ Beef Burger Set',healthy:'Low Carb Chicken Veg Bowl'}
+  ]
+};
+var MI={
+  rice:{icon:'🍛',bg:'rb',badge:'Rice Dish',tag:'rice'},
+  western:{icon:'🍔',bg:'wb',badge:'Western',tag:'west'},
+  healthy:{icon:'🥗',bg:'hb',badge:'Healthy Bowl',tag:'heal'}
+};
+var PRICE=15.90,CH=19;
+
+var MEAL_PHOTOS={
+  "Crispy Fried Chicken Rice": "https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?w=400&q=85&fit=crop",
+  "Chicken Biryani": "https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=400&q=85&fit=crop",
+  "Korean Gochujang Chicken Rice": "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=400&q=85&fit=crop",
+  "Sambal Chicken Rice": "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&q=85&fit=crop",
+  "Mutton Biryani": "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=400&q=85&fit=crop",
+  "Butter Chicken Rice": "https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=400&q=85&fit=crop",
+  "Spicy Chicken Sambal Rice": "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=400&q=85&fit=crop",
+  "Creamy Chicken Pasta": "https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=400&q=85&fit=crop",
+  "Spicy Aglio Olio Chicken Pasta": "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?w=400&q=85&fit=crop",
+  "Chicken Burger + Fries": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=85&fit=crop",
+  "Butter Chicken Naan + Gulab Jamun": "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&q=85&fit=crop",
+  "BBQ Chicken Wrap": "https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=400&q=85&fit=crop",
+  "Beef Burger + Fries": "https://images.unsplash.com/photo-1550547660-d9450f859349?w=400&q=85&fit=crop",
+  "Creamy Cajun Chicken Pasta": "https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=400&q=85&fit=crop",
+  "Beef Kofta Curry + Rice": "https://images.unsplash.com/photo-1574484284002-952d92456975?w=400&q=85&fit=crop",
+  "Beef Smash Burger Wrap": "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=400&q=85&fit=crop",
+  "BBQ Beef Burger Set": "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&q=85&fit=crop",
+  "Grilled Chicken Healthy Bowl": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&q=85&fit=crop",
+  "Teriyaki Chicken Salad Bowl": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&q=85&fit=crop",
+  "Lemon Herb Chicken Bowl": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&q=85&fit=crop",
+  "Honey Soy Chicken Healthy Bowl": "https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=400&q=85&fit=crop",
+  "Low Carb Chicken Veg Bowl": "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&q=85&fit=crop",
+  "Greek Chicken Salad Bowl": "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&q=85&fit=crop",
+  "Teriyaki Chicken Quinoa Bowl": "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&q=85&fit=crop",
+  "Lemon Herb Grilled Chicken Bowl": "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&q=85&fit=crop",
+  "Creamy Mushroom Chicken Bowl": "https://images.unsplash.com/photo-1547592180-85f173990554?w=400&q=85&fit=crop"
+};
+var S={w:1,d:0,m:null,q:1};
+var delivStr='';
+
+// ── SMART DAY LOGIC ──
+// Returns the next valid WEEKDAY delivery date (skips Sat/Sun)
+function getDeliveryDate(){
+  var now=new Date();
+  var after=now.getHours()>=CH;
+  var daysAhead=after?2:1;
+  var d=new Date();
+  d.setDate(d.getDate()+daysAhead);
+  // Skip Saturday (6) and Sunday (0)
+  while(d.getDay()===0||d.getDay()===6){
+    d.setDate(d.getDate()+1);
+  }
+  return d;
+}
+
+// Returns week (1 or 2) based on ISO week number
+function getMenuWeek(date){
+  var d=new Date(date);
+  d.setHours(0,0,0,0);
+  d.setDate(d.getDate()+4-(d.getDay()||7));
+  var yearStart=new Date(d.getFullYear(),0,1);
+  var weekNum=Math.ceil((((d-yearStart)/86400000)+1)/7);
+  return(weekNum%2===0)?2:1;
+}
+
+// Returns day index (0=Mon...4=Fri) from date
+function getDayIndex(date){
+  var day=date.getDay(); // 0=Sun,1=Mon...6=Sat
+  return day===0?4:day-1; // convert to Mon=0...Fri=4
+}
+
+function initMenu(){
+  var delivDate=getDeliveryDate();
+  var now=new Date();
+  var after=now.getHours()>=CH;
+  
+  // Auto-set correct week and day
+  S.w=getMenuWeek(delivDate);
+  S.d=getDayIndex(delivDate);
+  S.m=null;
+  
+  // Update week tabs UI
+  document.querySelectorAll('.wtab').forEach(function(t,i){
+    t.classList.toggle('active',i===(S.w-1));
+  });
+
+  delivStr=delivDate.toLocaleDateString('en-MY',{weekday:'long',day:'numeric',month:'long'});
+  var dd=document.getElementById('delivDate');if(dd)dd.textContent=delivStr;
+  
+  // Update hero text
+  var daysDiff=Math.round((delivDate-new Date(now.toDateString()))/(1000*60*60*24));
+  var heroText=daysDiff===1?"tomorrow's":daysDiff===2?"day after tomorrow's":delivDate.toLocaleDateString('en-MY',{weekday:'long'})+"'s";
+  var hd=document.getElementById('heroDay');if(hd)hd.textContent=heroText;
+  
+  // Weekend skip message
+  var isWeekend=(now.getDay()===5&&after)||now.getDay()===6||now.getDay()===0;
+  var subMsg=after?'Cutoff: tomorrow 7:00 PM':'Submit before today 7:00 PM';
+  if(isWeekend)subMsg='Weekend! Next delivery: '+delivDate.toLocaleDateString('en-MY',{weekday:'long',day:'numeric',month:'short'});
+  var cs=document.getElementById('cbSub');if(cs)cs.textContent=subMsg;
+  
+  // Show weekend notice if applicable
+  if(isWeekend){
+    var cb=document.getElementById('weekendNotice');
+    if(cb)cb.style.display='flex';
+  }
+  
+  function tick(){
+    var now=new Date(),h=now.getHours(),isAfter=h>=CH;
+    var target=new Date();if(isAfter)target.setDate(target.getDate()+1);target.setHours(CH,0,0,0);
+    var df=target-now,hh=Math.floor(df/3600000),mm=Math.floor((df%3600000)/60000),ss=Math.floor((df%60000)/1000);
+    var cd=document.getElementById('countdown');
+    if(cd)cd.textContent=String(hh).padStart(2,'0')+':'+String(mm).padStart(2,'0')+':'+String(ss).padStart(2,'0');
+  }
+  setInterval(tick,1000);tick();
+  
+  rDays();rMeals();updSum();
+  loadRepeatBanner();
+  
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        var id=e.target.id;
+        document.querySelectorAll('.nl,.bni').forEach(function(el){el.classList.remove('active');});
+        var nl=document.querySelector('.nl[onclick*="'+id+'"]');if(nl)nl.classList.add('active');
+        var bn=document.getElementById('bn-'+id);if(bn)bn.classList.add('active');
+      }
+    });
+  },{threshold:0.3});
+  document.querySelectorAll('section[id]').forEach(function(s){obs.observe(s);});
+}
+
+function loadRepeatBanner(){
+  try{
+    var saved=localStorage.getItem('dw_last_order');
+    if(!saved)return;
+    var o=JSON.parse(saved);
+    var rb=document.getElementById('repeatBanner');
+    if(rb)rb.style.display='flex';
+    var rd=document.getElementById('repeatDesc');
+    if(rd)rd.textContent=(o.mealName||'?')+' × '+(o.qty||1)+' — '+(o.company||'?');
+  }catch(e){}
+}
+function repeatOrder(){
+  try{
+    var saved=localStorage.getItem('dw_last_order');
+    if(!saved)return;
+    var o=JSON.parse(saved);
+    var f={empName:'name',empId:'empId',company:'company',dept:'dept',phone:'phone',notes:'notes'};
+    Object.keys(f).forEach(function(k){var el=document.getElementById(k);if(el&&o[f[k]])el.value=o[f[k]];});
+    S.w=o.week||1;S.d=o.dayIdx||0;S.m=o.mealType||null;S.q=o.qty||1;
+    var qi=document.getElementById('qtyInput');if(qi)qi.value=S.q;
+    document.querySelectorAll('.wtab').forEach(function(t,i){t.classList.toggle('active',i===(S.w-1));});
+    rDays();rMeals();updSum();
+    var qr=document.getElementById('qtyRow');if(qr)qr.style.display='flex';
+    goTo('order');
+  }catch(e){console.log('repeatOrder error',e);}
+}
+function setWeek(w,el){
+  S.w=w;S.m=null;S.d=0;
+  document.querySelectorAll('.wtab').forEach(function(t){t.classList.remove('active');});
+  el.classList.add('active');
+  rDays();rMeals();updSum();
+}
+function rDays(){
+  var strip=document.getElementById('dayStrip');
+  if(!strip)return;
+  strip.innerHTML='';
+  var delivDate=getDeliveryDate();
+  var correctDay=getDayIndex(delivDate);
+  var correctWeek=getMenuWeek(delivDate);
+  
+  M[S.w].forEach(function(d,i){
+    var b=document.createElement('button');
+    // Mark the correct delivery day
+    var isDelivDay=(i===correctDay&&S.w===correctWeek);
+    b.className='dbtn'+(i===S.d?' active':'')+(isDelivDay?' deliv-day':'');
+    b.innerHTML='<span class="dbtn-name">'+d.day.slice(0,3).toUpperCase()+'</span>'+
+      '<span class="dbtn-date">'+d.day+'</span>'+
+      (isDelivDay?'<span style="display:block;font-size:.52rem;color:#22c55e;margin-top:1px;font-weight:700">NEXT ✓</span>':'');
+    b.onclick=function(){S.d=i;S.m=null;rDays();rMeals();updSum();};
+    strip.appendChild(b);
+  });
+}
+function rMeals(){
+  var g=document.getElementById('mealGrid');
+  if(!g)return;
+  g.innerHTML='';
+  var day=M[S.w][S.d];
+  ['rice','western','healthy'].forEach(function(t){
+    var info=MI[t];
+    var mealName=day[t];
+    var photoUrl=MEAL_PHOTOS[mealName]||'';
+    var c=document.createElement('div');
+    c.className='mc'+(S.m===t?' sel':'');
+    c.onclick=function(){selM(t);};
+    // Photo header vs emoji header
+    var headerHtml=photoUrl
+      ? '<div class="mv-photo" style="height:110px;position:relative;overflow:hidden;border-radius:0">'+
+          '<img src="'+photoUrl+'" alt="'+mealName+'" style="width:100%;height:100%;object-fit:cover;transition:transform .4s" '+
+          'onload="this.style.opacity=1" onerror="this.parentNode.innerHTML='<div class=\"mv '+info.bg+'\"><span class=\"mvi\">'+info.icon+'</span></div>'" '+
+          'style="opacity:0;transition:opacity .3s,transform .4s">'+
+          '<div style="position:absolute;bottom:0;left:0;right:0;height:40px;background:linear-gradient(transparent,rgba(0,0,0,.5))"></div>'+
+          '<div style="position:absolute;top:6px;left:6px;background:rgba(0,0,0,.55);border-radius:6px;padding:3px 8px;font-size:.65rem;font-weight:700;color:#fff">'+info.badge+'</div>'+
+        '</div>'
+      : '<div class="mv '+info.bg+'"><span class="mvi">'+info.icon+'</span></div>';
+    c.innerHTML='<div class="mchk">✓</div>'+
+      headerHtml+
+      '<div class="mb">'+
+        '<div class="mn" style="font-size:.78rem;line-height:1.3;min-height:36px">'+mealName+'</div>'+
+        '<div class="mp" style="margin-top:6px">RM '+PRICE.toFixed(2)+'</div>'+
+      '</div>';
+    g.appendChild(c);
+  });
+}
+function selM(t){
+  S.m=t;S.q=1;
+  var qi=document.getElementById('qtyInput');if(qi)qi.value=1;
+  var qr=document.getElementById('qtyRow');if(qr)qr.style.display='flex';
+  rMeals();updSum();
+}
+function changeQty(d){
+  var i=document.getElementById('qtyInput');if(!i)return;
+  var v=Math.max(1,Math.min(50,(parseInt(i.value)||1)+d));
+  i.value=v;S.q=v;updSum();
+}
+function updSum(){
+  var sc=document.getElementById('sumContent');
+  var note=document.getElementById('osNote');
+  var btn=document.getElementById('submitBtn');
+  if(!sc)return;
+  if(!S.m){
+    sc.innerHTML='<div class="os-empty"><span class="os-empty-ico">🍱</span>Select a meal to begin</div>';
+    if(note)note.style.display='none';
+    if(btn)btn.disabled=true;
+    return;
+  }
+  var day=M[S.w][S.d],info=MI[S.m];
+  var qty=parseInt((document.getElementById('qtyInput')||{value:'1'}).value)||1;
+  S.q=qty;
+  var tot=(qty*PRICE).toFixed(2);
+  sc.innerHTML='<div class="os-item">'+
+    '<div class="os-price">RM '+tot+'</div>'+
+    '<div class="os-meal">'+info.icon+' '+day[S.m]+'</div>'+
+    '<div class="os-meta">'+info.badge+' · Wk '+S.w+' '+day.day+' · Qty: '+qty+'</div>'+
+    '</div>'+
+    '<div class="os-total">'+
+      '<span class="os-total-lbl">Total</span>'+
+      '<span class="os-total-val">RM '+tot+'</span>'+
+    '</div>';
+  if(note)note.style.display='block';
+  if(btn)btn.disabled=false;
+}
+var fbStar=0;
+function setStar(v){
+  fbStar=v;
+  document.querySelectorAll('.star').forEach(function(s,i){s.classList.toggle('active',i<v);});
+}
+function showToast(title,msg){
+  var t=document.getElementById('toast');
+  var tt=document.getElementById('toastTitle');
+  var tm=document.getElementById('toastMsg');
+  if(tt)tt.textContent=title||'Done!';
+  if(tm)tm.textContent=msg||'';
+  if(t){t.classList.add('show');setTimeout(function(){t.classList.remove('show');},5000);}
+}
+
+// Init when DOM ready
+document.addEventListener('DOMContentLoaded',function(){
+  initMenu();
+  console.log('Dabbawala customer app loaded!');
+});
+</script>
+<script type="module">
+import{initializeApp}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+import{getFirestore,collection,addDoc,serverTimestamp}from'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+const FC={apiKey:"AIzaSyCPcjHv-EX2vDkAN2hFTSlnVMHJdka1Mko",authDomain:"dabbawala-my.firebaseapp.com",projectId:"dabbawala-my",storageBucket:"dabbawala-my.firebasestorage.app",messagingSenderId:"173481088298",appId:"1:173481088298:web:f0622d09c01e8293cfba53"};
+var db=null;
+try{
+  var app=initializeApp(FC,'cust-'+Date.now());
+  db=getFirestore(app);
+  var dot=document.getElementById('cDot');var txt=document.getElementById('cTxt');
+  if(dot)dot.className='cp-dot ok';
+  if(txt)txt.textContent='Live';
+  console.log('Firebase connected!');
+}catch(e){
+  console.error('Firebase error:',e.message);
+  var dot=document.getElementById('cDot');var txt=document.getElementById('cTxt');
+  if(dot)dot.className='cp-dot err';
+  if(txt)txt.textContent='Ready';
+}
+
+// Make submitOrder global
+window.submitOrder=async function(){
+  var name=(document.getElementById('empName')||{value:''}).value.trim();
+  var company=(document.getElementById('company')||{value:''}).value.trim();
+  var phone=(document.getElementById('phone')||{value:''}).value.trim();
+  if(!name||!company||!phone){alert('Please fill in Name, Company and WhatsApp Number.');return;}
+  if(!S.m){alert('Please select a meal.');return;}
+  if(!db){
+    alert('Database not connected. Please check your internet and refresh the page.');
+    return;
+  }
+  var btn=document.getElementById('submitBtn');
+  var lbl=document.getElementById('submitLbl');
+  var spin=document.getElementById('spinner');
+  if(lbl)lbl.textContent='Sending...';
+  if(spin)spin.style.display='block';
+  if(btn)btn.disabled=true;
+  var day=M[S.w][S.d],info=MI[S.m];
+  var empId=(document.getElementById('empId')||{value:''}).value.trim();
+  var dept=(document.getElementById('dept')||{value:''}).value.trim();
+  var notes=(document.getElementById('notes')||{value:''}).value.trim();
+  try{
+    var docRef=await addDoc(collection(db,'orders'),{
+      timestamp:serverTimestamp(),
+      deliveryDate:delivStr,
+      employee:{name:name,id:empId,company:company,dept:dept,phone:phone,notes:notes},
+      meal:{week:S.w,day:day.day,dayIdx:S.d,type:S.m,name:day[S.m],badge:info.badge,icon:info.icon},
+      qty:S.q,
+      totalPrice:(S.q*PRICE).toFixed(2),
+      status:'pending'
+    });
+    window._lastOrderId=docRef.id;
+    window._lastOrderTime=Date.now();
+    // Start 30-min cancel countdown
+    var cancelBtn=document.getElementById('ccCancelBtn');
+    var cancelTimer=document.getElementById('ccCancelTimer');
+    if(cancelBtn)cancelBtn.onclick=window.cancelOrder;
+    var cancelInterval=setInterval(function(){
+      if(!window._lastOrderTime){clearInterval(cancelInterval);return;}
+      var elapsed=(Date.now()-window._lastOrderTime)/1000/60;
+      var remaining=Math.max(0,30-elapsed);
+      if(cancelTimer){
+        if(remaining>0){
+          cancelTimer.textContent='Cancel available for '+Math.ceil(remaining)+' more minute'+(Math.ceil(remaining)!==1?'s':'');
+        }else{
+          cancelTimer.textContent='Cancellation window expired';
+          if(cancelBtn)cancelBtn.style.display='none';
+          clearInterval(cancelInterval);
+        }
+      }
+    },30000);
+    localStorage.setItem('dw_last_order',JSON.stringify({
+      name:name,empId:empId,company:company,dept:dept,phone:phone,notes:notes,
+      week:S.w,dayIdx:S.d,mealType:S.m,mealName:day[S.m],qty:S.q
+    }));
+    var shortId='#'+docRef.id.slice(-6).toUpperCase();
+    var ccId=document.getElementById('ccOrderId');if(ccId)ccId.textContent='Order '+shortId;
+    var ccN=document.getElementById('ccName');if(ccN)ccN.textContent=name;
+    var ccC=document.getElementById('ccCompany');if(ccC)ccC.textContent=company+(dept?' · '+dept:'');
+    var ccM=document.getElementById('ccMeal');if(ccM)ccM.textContent=info.icon+' '+day[S.m];
+    var ccQ=document.getElementById('ccQty');if(ccQ)ccQ.textContent=S.q+' portion'+(S.q>1?'s':'');
+    var ccD=document.getElementById('ccDate');if(ccD)ccD.textContent=delivStr;
+    var ccT=document.getElementById('ccTotal');if(ccT)ccT.textContent='RM '+(S.q*PRICE).toFixed(2);
+    var msg=encodeURIComponent(
+      '✅ *Dabbawala Lunch — Order Confirmed!*\n\n'+
+      'Order ID: '+shortId+'\n'+
+      'Name: '+name+'\n'+
+      'Company: '+company+(dept?' · '+dept:'')+'\n'+
+      'Meal: '+info.icon+' '+day[S.m]+'\n'+
+      'Quantity: '+S.q+' portion'+(S.q>1?'s':'')+'\n'+
+      'Delivery: '+delivStr+'\n'+
+      'Total: RM '+(S.q*PRICE).toFixed(2)+'\n\n'+
+      'We will deliver fresh to your office! 🚚\n'+
+      'Questions? Call 011 2679 4152\n'+
+      '— Dabbawala Lunch Services 🍱'
+    );
+    var cleanPhone=phone.replace(/[\s\-\(\)]/g,'').replace(/^0/,'60');
+    var waBtn=document.getElementById('ccWaBtn');
+    if(waBtn)waBtn.onclick=function(){window.open('https://wa.me/'+cleanPhone+'?text='+msg,'_blank');};
+    var modal=document.getElementById('confirmModal');
+    if(modal)modal.classList.add('show');
+    S.m=null;S.q=1;
+    var qr=document.getElementById('qtyRow');if(qr)qr.style.display='none';
+    var qi=document.getElementById('qtyInput');if(qi)qi.value=1;
+    ['empName','empId','company','dept','phone','notes'].forEach(function(id){
+      var el=document.getElementById(id);if(el)el.value='';
+    });
+    rMeals();updSum();
+    loadRepeatBanner();
+  }catch(err){
+    alert('Failed to submit order.\nError: '+err.message+'\n\nPlease check your internet and try again.');
+    if(btn)btn.disabled=false;
+  }
+  if(lbl)lbl.textContent='Place Order →';
+  if(spin)spin.style.display='none';
+};
+
+// Cancel order (within 30 mins)
+window.cancelOrder=async function(){
+  if(!window._lastOrderId||!window._lastOrderTime){alert('No recent order to cancel.');return;}
+  var elapsed=(Date.now()-window._lastOrderTime)/1000/60;
+  if(elapsed>30){
+    alert('Sorry, orders can only be cancelled within 30 minutes of placing.');
+    document.getElementById('ccCancelBtn').style.display='none';
+    document.getElementById('ccCancelTimer').textContent='Cancellation window has expired.';
+    return;
+  }
+  if(!confirm('Are you sure you want to cancel this order?'))return;
+  try{
+    var{doc,deleteDoc}=await import('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js');
+    await deleteDoc(doc(db,'orders',window._lastOrderId));
+    document.getElementById('confirmModal').classList.remove('show');
+    showToast('Order Cancelled','Your order has been cancelled successfully.');
+    window._lastOrderId=null;window._lastOrderTime=null;
+    localStorage.removeItem('dw_last_order');
+    loadRepeatBanner();
+  }catch(e){alert('Error cancelling: '+e.message);}
+};
+
+window.submitFeedback=async function(){
+  if(!fbStar){alert('Please select a star rating first.');return;}
+  var name=(document.getElementById('fbName')||{value:''}).value.trim();
+  var company=(document.getElementById('fbCompany')||{value:''}).value.trim();
+  var comment=(document.getElementById('fbComment')||{value:''}).value.trim();
+  if(!name){alert('Please enter your name.');return;}
+  if(!db){alert('Not connected. Please refresh.');return;}
+  try{
+    await addDoc(collection(db,'feedback'),{
+      timestamp:serverTimestamp(),rating:fbStar,name:name,company:company,comment:comment
+    });
+    var fields=['fbName','fbCompany','fbComment'];
+    fields.forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+    fbStar=0;
+    document.querySelectorAll('.star').forEach(function(s){s.classList.remove('active');});
+    showToast('Feedback Received! 🙏','Thank you '+name+'! Your feedback helps us improve.');
+  }catch(e){alert('Error: '+e.message);}
+};
+
+// PWA install
+var dp=null;
+window.addEventListener('beforeinstallprompt',function(e){
+  e.preventDefault();dp=e;
+  setTimeout(function(){
+    var b=document.getElementById('instBanner');if(b)b.style.display='flex';
+  },4000);
+});
+var instBtn=document.getElementById('instBtn');
+if(instBtn)instBtn.addEventListener('click',async function(){
+  if(!dp)return;dp.prompt();await dp.userChoice;dp=null;
+  var b=document.getElementById('instBanner');if(b)b.style.display='none';
+});
+if('serviceWorker'in navigator)navigator.serviceWorker.register('/sw.js').catch(function(){});
+</script>
+</body>
+</html>
