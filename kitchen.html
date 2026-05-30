@@ -188,10 +188,37 @@ tbody tr:hover td{background:rgba(232,112,10,.04)}
 </head>
 <body>
 
+<!-- LOGIN OVERLAY - shown until staff logs in -->
+<div id="loginOverlay" style="position:fixed;inset:0;z-index:9999;background:#161616;display:flex;align-items:center;justify-content:center;padding:20px">
+  <div style="background:#1e1e1e;border:1px solid #2a2a2a;border-radius:16px;padding:32px;max-width:380px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.5)">
+    <div style="text-align:center;margin-bottom:24px">
+      <div style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:900;color:#fff">DABBAWALA <span style="color:#E8700A;font-style:italic">LUNCH</span></div>
+      <div style="font-size:.6rem;color:rgba(255,255,255,.3);letter-spacing:2px;text-transform:uppercase;margin-top:4px">Kitchen Dashboard · Staff Login</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div>
+        <label style="font-size:.7rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:rgba(255,255,255,.5);display:block;margin-bottom:5px">Email</label>
+        <input type="email" id="loginEmail" placeholder="you@dabbawala.com" style="width:100%;padding:11px 13px;border:1.5px solid #333;border-radius:9px;background:#111;color:#fff;font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none" autocomplete="username">
+      </div>
+      <div>
+        <label style="font-size:.7rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:rgba(255,255,255,.5);display:block;margin-bottom:5px">Password</label>
+        <input type="password" id="loginPassword" placeholder="••••••••" style="width:100%;padding:11px 13px;border:1.5px solid #333;border-radius:9px;background:#111;color:#fff;font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()">
+      </div>
+      <button onclick="doLogin()" id="loginBtn" style="width:100%;padding:13px;border:none;border-radius:10px;background:#E8700A;color:#fff;font-family:'DM Sans',sans-serif;font-weight:700;font-size:.9rem;cursor:pointer;margin-top:6px">Log In →</button>
+      <div id="loginError" style="display:none;font-size:.76rem;color:#f87171;text-align:center;padding:8px;background:rgba(239,68,68,.1);border-radius:8px;margin-top:4px"></div>
+      <div style="font-size:.68rem;color:rgba(255,255,255,.25);text-align:center;margin-top:8px;line-height:1.6">Authorized staff only.<br>Contact owner if you need access.</div>
+    </div>
+  </div>
+</div>
+
+<!-- main app (hidden until login) -->
+<div id="appContent" style="display:none">
+
 <nav class="nav">
   <div class="nav-brand">DABBAWALA <span>LUNCH</span><small>Kitchen Dashboard</small></div>
   <div class="nav-right">
     <div class="conn"><div class="cd" id="cdot"></div><span id="ctxt">Connecting...</span></div>
+    <button class="btn btn-d" onclick="doLogout()" title="Log out" style="padding:7px 11px">🔓 Logout</button>
     <select id="viewDate" onchange="changeViewDate()" style="padding:6px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.1);color:#fff;font-family:DM Sans,sans-serif;font-size:.74rem;cursor:pointer">
       <option value="today">📅 Today</option>
       <option value="yesterday">📅 Yesterday</option>
@@ -375,9 +402,25 @@ tbody tr:hover td{background:rgba(232,112,10,.04)}
 <!-- Firebase SDK via CDN - NO module needed! -->
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
 
 <script>
 // ============================================================
+// ── ERROR MONITORING - catches crashes ──
+window.addEventListener('error', function(e) {
+  console.error('[CRASH]', e.message, 'at', e.filename, e.lineno);
+  try {
+    if (typeof firebase !== 'undefined' && firebase.apps && firebase.apps.length) {
+      firebase.firestore().collection('errors').add({
+        when: new Date().toISOString(),
+        page: 'kitchen',
+        message: String(e.message).slice(0,200),
+        location: String(e.filename).slice(0,100) + ':' + e.lineno
+      }).catch(function(){});
+    }
+  } catch(_) {}
+});
+
 // KITCHEN DASHBOARD - ALL PLAIN JS, NO MODULES
 // ============================================================
 
@@ -400,43 +443,135 @@ var FC = {
   appId: "1:173481088298:web:f0622d09c01e8293cfba53"
 };
 
-// ROBUST FIREBASE INIT - waits for SDK, retries, shows clear on-screen status
+// ROBUST FIREBASE INIT WITH AUTH - waits for SDK, then requires login
 var fbAttempts = 0;
+var auth = null;
+var currentUser = null;
+var currentRole = 'kitchen';  // default to most-restricted for safety
+
+// ── ROLE SYSTEM (Phase 2 ready) ──
+// Today: role is decided by the login email.
+// Phase 2: replace this function body with a lookup in a 'staff' collection.
+// IMPORTANT: nothing else in the code needs to change to add individual logins.
+function getRoleForEmail(email) {
+  email = (email || '').toLowerCase().trim();
+  // ── EXPLICIT ACCOUNT ROLES ──
+  // Phase 2: to add staff, just add their email + role here (or move to a 'staff' collection).
+  var ROLES = {
+    'jaibhole1986@gmail.com': 'owner',      // OWNER / admin - full access
+    'kitchenignite@gmail.com': 'kitchen'    // KITCHEN - restricted, no pricing/invoices
+    // 'delivery@dabbawala.com': 'delivery',
+    // 'finance@dabbawala.com': 'finance'
+  };
+  if (ROLES[email]) return ROLES[email];
+  // any unlisted account defaults to most-restricted for safety
+  return 'kitchen';
+}
+
+// Hide financial data + sensitive tabs for the kitchen role
+function applyRolePermissions() {
+  var isKitchen = (currentRole === 'kitchen');
+  var isDelivery = (currentRole === 'delivery');
+  // Tabs to hide from kitchen: Invoices, Reports, HR View (all show money)
+  var hideMoneyTabs = isKitchen || isDelivery;
+  ['tab-invoices','tab-reports','tab-hr'].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) el.style.display = hideMoneyTabs ? 'none' : '';
+  });
+  // KPI cards that show revenue - hide for kitchen/delivery
+  if (hideMoneyTabs) {
+    var rev = document.getElementById('kRev');
+    if (rev) { var card = rev.closest('.kpi'); if (card) card.style.display = 'none'; }
+    // Hide WA Summary (contains revenue) for kitchen
+    document.querySelectorAll('.btn-wa').forEach(function(b){ b.style.display='none'; });
+  }
+  // mark body so CSS can hide price columns
+  document.body.setAttribute('data-role', currentRole);
+}
+
 function initFirebase() {
   fbAttempts++;
-  // Check if Firebase SDK actually loaded from the CDN
   if (typeof firebase === 'undefined' || !firebase.initializeApp) {
     if (fbAttempts < 20) {
-      // SDK not loaded yet - wait and retry (up to 10 seconds)
-      document.getElementById('ctxt').textContent = 'Loading SDK... (' + fbAttempts + ')';
       setTimeout(initFirebase, 500);
       return;
     } else {
-      // SDK failed to load after 10 seconds - network/CDN blocked
-      document.getElementById('cdot').className = 'cd err';
-      document.getElementById('ctxt').textContent = 'SDK blocked';
-      document.getElementById('tbody').innerHTML = '<tr><td colspan="9"><div class="empty" style="color:#f87171">⚠️ Firebase SDK could not load from the internet.<br><br>This usually means:<br>1. Your network/wifi is blocking gstatic.com<br>2. Try a different network (mobile hotspot)<br>3. Disable any VPN/firewall/ad-blocker<br><br><button onclick="location.reload()" style="padding:8px 16px;background:var(--o);color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:700;margin-top:8px">🔄 Reload</button></div></td></tr>';
+      showLoginError('Firebase could not load. Check your internet / disable VPN / try mobile hotspot, then reload.');
       return;
     }
   }
-  // SDK is ready - initialize
   try {
-    if (!firebase.apps.length) {
-      firebase.initializeApp(FC);
-    }
+    if (!firebase.apps.length) { firebase.initializeApp(FC); }
     db = firebase.firestore();
-    console.log('Firebase ready!');
-    document.getElementById('cdot').className = 'cd ok';
-    document.getElementById('ctxt').textContent = 'Connected';
-    startListener();
+    auth = firebase.auth();
+    console.log('Firebase ready, checking auth...');
+
+    // Watch login state - this is the security gate
+    auth.onAuthStateChanged(function(user) {
+      if (user) {
+        // LOGGED IN - show the app, start the dashboard
+        currentUser = user;
+        currentRole = getRoleForEmail(user.email);
+        applyRolePermissions();
+        document.getElementById('loginOverlay').style.display = 'none';
+        document.getElementById('appContent').style.display = 'block';
+        document.getElementById('cdot').className = 'cd ok';
+        document.getElementById('ctxt').textContent = 'Connected (' + currentRole + ')';
+        startListener();
+      } else {
+        // NOT LOGGED IN - show login screen, hide app
+        currentUser = null;
+        document.getElementById('loginOverlay').style.display = 'flex';
+        document.getElementById('appContent').style.display = 'none';
+      }
+    });
   } catch(e) {
     console.error('Firebase init error:', e);
-    document.getElementById('cdot').className = 'cd err';
-    document.getElementById('ctxt').textContent = 'Error: ' + e.message;
-    document.getElementById('tbody').innerHTML = '<tr><td colspan="9"><div class="empty" style="color:#f87171">⚠️ ' + e.message + '<br><br><button onclick="location.reload()" style="padding:8px 16px;background:var(--o);color:#fff;border:none;border-radius:8px;cursor:pointer;font-weight:700;margin-top:8px">🔄 Reload</button></div></td></tr>';
+    showLoginError('Error: ' + e.message);
   }
 }
-// Start init when page is ready
+
+function doLogin() {
+  var email = (document.getElementById('loginEmail').value || '').trim();
+  var pass = document.getElementById('loginPassword').value || '';
+  if (!email || !pass) { showLoginError('Please enter email and password.'); return; }
+  var btn = document.getElementById('loginBtn');
+  btn.textContent = 'Logging in...'; btn.disabled = true;
+  hideLoginError();
+  auth.signInWithEmailAndPassword(email, pass)
+    .then(function(cred) {
+      console.log('Logged in:', cred.user.email);
+      logAudit('login', 'Staff logged in: ' + cred.user.email);
+      btn.textContent = 'Log In →'; btn.disabled = false;
+      document.getElementById('loginPassword').value = '';
+    })
+    .catch(function(e) {
+      var msg = 'Login failed.';
+      if (e.code === 'auth/invalid-email') msg = 'Invalid email format.';
+      else if (e.code === 'auth/user-not-found' || e.code === 'auth/wrong-password' || e.code === 'auth/invalid-credential') msg = 'Wrong email or password.';
+      else if (e.code === 'auth/too-many-requests') msg = 'Too many attempts. Wait a few minutes.';
+      else msg = e.message;
+      showLoginError(msg);
+      btn.textContent = 'Log In →'; btn.disabled = false;
+    });
+}
+
+function doLogout() {
+  if (!auth) return;
+  if (!confirm('Log out of the kitchen dashboard?')) return;
+  logAudit('logout', 'Staff logged out: ' + (currentUser ? currentUser.email : '?'));
+  auth.signOut();
+}
+
+function showLoginError(msg) {
+  var el = document.getElementById('loginError');
+  if (el) { el.textContent = msg; el.style.display = 'block'; }
+}
+function hideLoginError() {
+  var el = document.getElementById('loginError');
+  if (el) el.style.display = 'none';
+}
+
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initFirebase);
 } else {
@@ -461,9 +596,26 @@ function startListener() {
   // If previous listener exists, stop it first
   if (unsubscribe) { try { unsubscribe(); } catch(e) {} }
 
+  // Also listen for customer cancellation requests (create-only from public)
+  db.collection('cancellation_requests').onSnapshot(function(csnap) {
+    csnap.docChanges().forEach(function(ch) {
+      if (ch.type === 'added') {
+        var req = ch.doc.data();
+        if (req && req.orderId) {
+          // notify kitchen of cancellation request
+          var n = document.getElementById('notif');
+          if (n) {
+            document.getElementById('nTitle').textContent = '\u274c Cancellation Request';
+            document.getElementById('nBody').textContent = 'Customer cancelled order ' + req.orderId.slice(-6).toUpperCase() + '. Please remove it.';
+            n.classList.add('show');
+            setTimeout(function(){ n.classList.remove('show'); }, 8000);
+          }
+        }
+      }
+    });
+  }, function(e){ console.error('cancel listener:', e); });
+
   // SIMPLEST POSSIBLE QUERY - just the whole collection, no orderBy/where/limit.
-  // This NEVER needs a Firestore index and NEVER fails silently.
-  // We sort in JavaScript instead. Bulletproof for live order receiving.
   unsubscribe = db.collection('orders')
     .onSnapshot(function(snap) {
     console.log('Got snapshot! Orders:', snap.size);
@@ -665,7 +817,9 @@ function renderHR() {
 function nextStat(id, cur) {
   if (!db) return;
   var nx = SF[(SF.indexOf(cur)+1) % SF.length];
-  db.collection('orders').doc(id).update({status: nx}).catch(function(e) { alert('Error: '+e.message); });
+  db.collection('orders').doc(id).update({status: nx})
+    .then(function(){ logAudit('order_status_changed', 'Order ' + id.slice(-6).toUpperCase() + ': ' + cur + ' -> ' + nx); })
+    .catch(function(e) { alert('Error: '+e.message); });
 }
 
 function delOrd(id) {
@@ -675,7 +829,7 @@ function delOrd(id) {
   if (!confirm('Delete order for ' + name + ' (' + meal + ')?\n\nThis CANNOT be undone.')) return;
   if (!db) { alert('Not connected.'); return; }
   db.collection('orders').doc(id).delete()
-    .then(function() { console.log('Order deleted:', id); })
+    .then(function() { console.log('Order deleted:', id); logAudit('order_deleted', 'Order ' + id.slice(-6).toUpperCase() + ' (' + name + ' / ' + meal + ') deleted'); })
     .catch(function(e) { alert('Delete failed: ' + e.message); });
 }
 
@@ -684,6 +838,7 @@ function doConfirmAll() {
   var pending = orders.filter(function(o) { return o.status === 'pending'; });
   if (!pending.length) { alert('No pending orders.'); return; }
   pending.forEach(function(o) { db.collection('orders').doc(o.id).update({status:'confirmed'}); });
+  logAudit('orders_bulk_confirmed', pending.length + ' orders confirmed at once');
 }
 
 function setFilt(f, el) {
@@ -750,6 +905,7 @@ function renderLabels(os) {
 // ── INVOICE ──
 function genInvoice(co) {
   var os = orders.filter(function(o) { return (o.employee&&o.employee.company) === co; });
+  logAudit('invoice_generated', 'Invoice generated for ' + co + ' (' + os.length + ' orders)');
   var now = new Date();
   var invNo = 'DW-' + now.getFullYear() + pad2(now.getMonth()+1) + pad2(now.getDate()) + '-' + String(Math.floor(Math.random()*900)+100);
   var tot = os.reduce(function(s,o){return s+(o.qty||1)*PRICE;},0);
@@ -1003,6 +1159,20 @@ function notify(o) {
   try { var ctx=new AudioContext();var osc=ctx.createOscillator();var g=ctx.createGain();osc.connect(g);g.connect(ctx.destination);osc.frequency.value=880;g.gain.setValueAtTime(.3,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.4);osc.start();osc.stop(ctx.currentTime+.4); } catch(e) {}
 }
 
+// ── AUDIT LOG ── records who did what, when
+function logAudit(action, detail) {
+  if (!db) return;
+  try {
+    db.collection('audit_logs').add({
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      action: action,
+      detail: detail || '',
+      user: currentUser ? currentUser.email : 'unknown',
+      device: navigator.userAgent.slice(0, 80)
+    });
+  } catch(e) { console.error('audit log failed:', e); }
+}
+
 // ── PAGINATION ──
 function changePage(dir) {
   currentPage += dir;
@@ -1080,5 +1250,6 @@ window.addEventListener('beforeunload', function(e) {
 
 console.log('Dabbawala Kitchen v5 loaded!');
 </script>
+</div><!-- /appContent -->
 </body>
 </html>
