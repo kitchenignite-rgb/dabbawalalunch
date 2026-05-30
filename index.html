@@ -476,6 +476,21 @@ footer{background:#0F1225;border-top:3px solid var(--red);padding:44px 5% 24px}
 
 <script>
 // ============================================================
+// ── ERROR MONITORING - catches crashes ──
+window.addEventListener('error', function(e) {
+  console.error('[CRASH]', e.message, 'at', e.filename, e.lineno);
+  try {
+    if (typeof firebase !== 'undefined' && firebase.apps && firebase.apps.length) {
+      firebase.firestore().collection('errors').add({
+        when: new Date().toISOString(),
+        page: 'customer',
+        message: String(e.message).slice(0,200),
+        location: String(e.filename).slice(0,100) + ':' + e.lineno
+      }).catch(function(){});
+    }
+  } catch(_) {}
+});
+
 // ALL FUNCTIONS — plain script, works from any HTML button
 // ============================================================
 
@@ -954,10 +969,15 @@ document.getElementById('ccCancelBtn').onclick = function() {
   if (elapsed > 30) { alert('Cancellation window has expired (30 minutes).'); return; }
   if (!confirm('Are you sure you want to cancel this order?')) return;
   if (window._db) {
-    window._db.collection('orders').doc(lastOrderId).delete()
-      .then(function() {
+    // Secure model: public cannot delete. Instead we log a cancellation REQUEST
+    // (a create, which is allowed). The kitchen sees it and removes the order.
+    window._db.collection('cancellation_requests').add({
+      orderId: lastOrderId,
+      requestedAt: new Date().toISOString(),
+      reason: 'Customer cancelled within 30-min window'
+    }).then(function() {
         document.getElementById('confirmModal').classList.remove('show');
-        showToast('Order Cancelled', 'Your order has been cancelled successfully.');
+        showToast('Cancellation Requested', 'Your order has been cancelled. The kitchen has been notified.');
         lastOrderId = null; lastOrderTime = null;
         localStorage.removeItem('dw_last');
         loadRepeat();
