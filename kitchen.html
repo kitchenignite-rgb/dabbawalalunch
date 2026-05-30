@@ -503,6 +503,23 @@ function applyRolePermissions() {
     if (prep) prep.style.display = 'none';
     // hide the "Mark All Paid" button for logistics
     document.querySelectorAll('.btn-g').forEach(function(b){ b.style.display='none'; });
+    // drivers don't print packaging labels
+    document.querySelectorAll('.btn-o').forEach(function(b){ b.style.display='none'; });
+    // retitle the dashboard for the driver
+    var navSmall = document.querySelector('.nav-brand small');
+    if (navSmall) navSmall.textContent = 'Delivery Dashboard';
+    document.title = 'Dabbawala Delivery Dashboard';
+    // repurpose the three meal-count stat cards into delivery stats
+    var setKpi = function(cardSel, ico, lbl, sub){
+      var card = document.querySelector(cardSel);
+      if (!card) return;
+      var i = card.querySelector('.kpi-ico'); if (i) i.textContent = ico;
+      var l = card.querySelector('.kpi-lbl'); if (l) l.textContent = lbl;
+      var s = card.querySelector('.kpi-sub'); if (s) s.textContent = sub;
+    };
+    setKpi('.kpi.rice', '📦', 'Ready', 'to pick up');
+    setKpi('.kpi.west', '🛵', 'Out', 'delivering now');
+    setKpi('.kpi.heal', '✅', 'Delivered', 'done today');
   }
   // Kitchen can't verify payment either - hide Mark All Paid
   if (isKitchen) {
@@ -732,6 +749,16 @@ function render() {
   document.getElementById('kRev').textContent = 'RM' + rev.toFixed(0);
   document.getElementById('pendingBadge').textContent = pend;
 
+  // For drivers, the three meal cards instead show delivery progress
+  if (currentRole === 'delivery') {
+    var cReady = orders.filter(function(o){ return o.status === 'ready'; }).length;
+    var cOut = orders.filter(function(o){ return o.status === 'out'; }).length;
+    var cDel = orders.filter(function(o){ return o.status === 'delivered'; }).length;
+    document.getElementById('kRice').textContent = cReady;
+    document.getElementById('kWest').textContent = cOut;
+    document.getElementById('kHeal').textContent = cDel;
+  }
+
   var mx = Math.max(rice, west, heal, 1);
   document.getElementById('pRice').textContent = rice;
   document.getElementById('pWest').textContent = west;
@@ -785,6 +812,34 @@ function renderTable() {
     var tm = ts ? ts.toLocaleTimeString('en-MY', {hour:'2-digit', minute:'2-digit'}) : '-';
     var st = o.status || 'pending';
     var mtype = o.meal && o.meal.type || '';
+    var isDriver = (currentRole === 'delivery');
+    // status cell: clickable to advance for kitchen/owner; read-only for drivers
+    var statusCell = isDriver
+      ? '<td><span class="stat ' + (SC[st]||'pending') + '">' + (SL[st]||st) + '</span></td>'
+      : '<td><span class="stat ' + (SC[st]||'pending') + '" onclick="nextStat(\'' + o.id + '\',\'' + st + '\')">' + (SL[st]||st) + '</span></td>';
+    // actions cell: delivery-focused buttons for drivers; full controls otherwise
+    var actionsCell;
+    if (isDriver) {
+      var ph = (((o.employee&&o.employee.phone)||'')+'').replace(/[^0-9+]/g,'');
+      var callBtn = ph ? '<a class="actbtn" href="tel:' + ph + '" title="Call customer" style="text-decoration:none">📞</a>' : '';
+      var mainBtn;
+      if (st === 'ready') {
+        mainBtn = '<button class="btn btn-g" style="padding:6px 12px;font-size:.74rem" onclick="nextStat(\'' + o.id + '\',\'ready\')">🛵 Out for Delivery</button>';
+      } else if (st === 'out') {
+        mainBtn = '<button class="btn btn-g" style="padding:6px 12px;font-size:.74rem" onclick="nextStat(\'' + o.id + '\',\'out\')">✅ Mark Delivered</button>';
+      } else if (st === 'delivered') {
+        mainBtn = '<span style="font-size:.72rem;color:rgba(255,255,255,.35)">✅ Delivered</span>';
+      } else {
+        mainBtn = '<span style="font-size:.72rem;color:rgba(255,255,255,.3)">👨‍🍳 In kitchen</span>';
+      }
+      actionsCell = '<td style="white-space:nowrap">' + mainBtn + ' ' + callBtn + '</td>';
+    } else {
+      actionsCell = '<td>' +
+        '<button class="actbtn" title="Next Status" onclick="nextStat(\'' + o.id + '\',\'' + st + '\')">▶</button>' +
+        '<button class="actbtn" title="Label" onclick="showLabel(\'' + o.id + '\')">🏷️</button>' +
+        '<button class="actbtn" title="Delete" onclick="delOrd(\'' + o.id + '\')">🗑</button>' +
+      '</td>';
+    }
     return '<tr>' +
       '<td><span class="oid">' + o.id.slice(-6).toUpperCase() + '</span></td>' +
       '<td><div class="oname">' + ((o.employee&&o.employee.name)||'?') + '</div><div class="ometa">' + ((o.employee&&o.employee.phone)||'') + '</div></td>' +
@@ -793,12 +848,8 @@ function renderTable() {
       '<td><strong>' + (o.qty||1) + '</strong></td>' +
       '<td style="font-size:.7rem;color:rgba(255,255,255,.45)">' + (o.deliveryDate||'-') + '</td>' +
       '<td style="font-size:.68rem;color:rgba(255,255,255,.38)">' + tm + '</td>' +
-      '<td><span class="stat ' + (SC[st]||'pending') + '" onclick="nextStat(\'' + o.id + '\',\'' + st + '\')">' + (SL[st]||st) + '</span></td>' +
-      '<td>' +
-        '<button class="actbtn" title="Next Status" onclick="nextStat(\'' + o.id + '\',\'' + st + '\')">▶</button>' +
-        '<button class="actbtn" title="Label" onclick="showLabel(\'' + o.id + '\')">🏷️</button>' +
-        '<button class="actbtn" title="Delete" onclick="delOrd(\'' + o.id + '\')">🗑</button>' +
-      '</td>' +
+      statusCell +
+      actionsCell +
     '</tr>';
   }).join('');
 }
@@ -860,6 +911,11 @@ function nextStat(id, cur) {
   // Kitchen cannot move pending -> paid (they don't handle money).
   if (cur === 'pending' && nx === 'paid' && currentRole === 'kitchen') {
     alert('Only the owner/admin can verify payment.\n\nThe kitchen should start cooking once an order shows "Paid".');
+    return;
+  }
+  // RULE: drivers may only move Ready -> Out for Delivery, or Out -> Delivered.
+  if (currentRole === 'delivery' && !((cur === 'ready' && nx === 'out') || (cur === 'out' && nx === 'delivered'))) {
+    alert('Drivers can only mark orders "Out for Delivery" or "Delivered".\n\nThe kitchen handles everything before pickup.');
     return;
   }
   db.collection('orders').doc(id).update({status: nx})
