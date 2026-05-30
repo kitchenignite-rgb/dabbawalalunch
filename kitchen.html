@@ -218,6 +218,7 @@ tbody tr:hover td{background:rgba(232,112,10,.04)}
   <div class="nav-brand">DABBAWALA <span>LUNCH</span><small>Kitchen Dashboard</small></div>
   <div class="nav-right">
     <div class="conn"><div class="cd" id="cdot"></div><span id="ctxt">Connecting...</span></div>
+    <button class="btn btn-d" onclick="doBackupAll()" title="Download full backup" id="backupBtn" style="padding:7px 11px">💾 Backup Everything</button>
     <button class="btn btn-d" onclick="doLogout()" title="Log out" style="padding:7px 11px">🔓 Logout</button>
     <select id="viewDate" onchange="changeViewDate()" style="padding:6px 10px;border-radius:8px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.1);color:#fff;font-family:DM Sans,sans-serif;font-size:.74rem;cursor:pointer">
       <option value="today">📅 Today</option>
@@ -471,10 +472,10 @@ function getRoleForEmail(email) {
   // ── EXPLICIT ACCOUNT ROLES ──
   // Phase 2: to add staff, just add their email + role here (or move to a 'staff' collection).
   var ROLES = {
-    'jaibhole1986@gmail.com': 'owner',      // OWNER / admin - full access
-    'kitchenignite@gmail.com': 'kitchen'    // KITCHEN - restricted, no pricing/invoices
-    // 'delivery@dabbawala.com': 'delivery',
-    // 'finance@dabbawala.com': 'finance'
+    'jaibhole1986@gmail.com': 'owner',        // OWNER / admin - full access
+    'kitchenignite@gmail.com': 'kitchen',     // KITCHEN - restricted, no pricing/invoices
+    'tasstodelivery@gmail.com': 'delivery'    // LOGISTICS / driver - delivery view only
+    // add more staff here, e.g. 'finance@dabbawala.com': 'finance'
   };
   if (ROLES[email]) return ROLES[email];
   // any unlisted account defaults to most-restricted for safety
@@ -507,6 +508,9 @@ function applyRolePermissions() {
   if (isKitchen) {
     document.querySelectorAll('.btn-g').forEach(function(b){ b.style.display='none'; });
   }
+  // Backup is owner-only
+  var bk = document.getElementById('backupBtn');
+  if (bk) bk.style.display = (currentRole === 'owner') ? '' : 'none';
   document.body.setAttribute('data-role', currentRole);
 }
 
@@ -556,6 +560,20 @@ function doLogin() {
   var email = (document.getElementById('loginEmail').value || '').trim();
   var pass = document.getElementById('loginPassword').value || '';
   if (!email || !pass) { showLoginError('Please enter email and password.'); return; }
+  // SAFETY GUARD: if auth isn't ready yet, try to initialize it now
+  if (!auth) {
+    if (typeof firebase !== 'undefined' && firebase.auth) {
+      try {
+        if (!firebase.apps.length) { firebase.initializeApp(FC); }
+        if (!db) db = firebase.firestore();
+        auth = firebase.auth();
+      } catch(e) {}
+    }
+  }
+  if (!auth) {
+    showLoginError('Login system still loading. Please wait 3 seconds and try again. If this persists, reload the page (Ctrl+Shift+R).');
+    return;
+  }
   var btn = document.getElementById('loginBtn');
   btn.textContent = 'Logging in...'; btn.disabled = true;
   hideLoginError();
@@ -1141,6 +1159,57 @@ function loadHistory() {
 }
 
 // ── CSV EXPORT ──
+function doBackupAll() {
+  if (!db) { alert('Not connected.'); return; }
+  if (currentRole !== 'owner') { alert('Only the owner can run a full backup.'); return; }
+  var btn = event && event.target ? event.target : null;
+  if (btn) { btn.textContent = '⏳ Backing up...'; btn.disabled = true; }
+
+  function csvLine(arr){ return arr.map(function(c){return '"'+String(c==null?'':c).replace(/"/g,'""')+'"';}).join(','); }
+  var allCsv = '';
+
+  // 1. ORDERS
+  db.collection('orders').get().then(function(snap){
+    allCsv += '=== ORDERS ('+snap.size+') ===\n';
+    allCsv += csvLine(['Date','OrderID','Name','Company','Dept','Phone','Meal','Type','Qty','Amount','Status','Delivery','Notes'])+'\n';
+    snap.docs.forEach(function(d){
+      var o=d.data();
+      var t=o.timestamp&&o.timestamp.seconds?new Date(o.timestamp.seconds*1000):new Date(0);
+      allCsv += csvLine([t.toLocaleString('en-MY'),d.id,(o.employee&&o.employee.name||''),(o.employee&&o.employee.company||''),(o.employee&&o.employee.dept||''),(o.employee&&o.employee.phone||''),(o.meal&&o.meal.name||''),(o.meal&&o.meal.type||''),(o.qty||1),((o.qty||1)*PRICE).toFixed(2),(o.status||''),(o.deliveryDate||''),(o.employee&&o.employee.notes||'')])+'\n';
+    });
+    // 2. FEEDBACK
+    return db.collection('feedback').get();
+  }).then(function(snap){
+    allCsv += '\n=== FEEDBACK ('+snap.size+') ===\n';
+    allCsv += csvLine(['Date','Name','Company','Rating','Comment'])+'\n';
+    snap.docs.forEach(function(d){
+      var f=d.data();
+      var t=f.timestamp&&f.timestamp.seconds?new Date(f.timestamp.seconds*1000):new Date(0);
+      allCsv += csvLine([t.toLocaleString('en-MY'),(f.name||''),(f.company||''),(f.rating||''),(f.comment||'')])+'\n';
+    });
+    // 3. AUDIT LOGS
+    return db.collection('audit_logs').get();
+  }).then(function(snap){
+    allCsv += '\n=== AUDIT LOGS ('+snap.size+') ===\n';
+    allCsv += csvLine(['Date','Action','Detail','User'])+'\n';
+    var logs = snap.docs.map(function(d){return d.data();}).sort(function(a,b){return ((b.timestamp&&b.timestamp.seconds)||0)-((a.timestamp&&a.timestamp.seconds)||0);});
+    logs.forEach(function(l){
+      var t=l.timestamp&&l.timestamp.seconds?new Date(l.timestamp.seconds*1000):new Date(0);
+      allCsv += csvLine([t.toLocaleString('en-MY'),(l.action||''),(l.detail||''),(l.user||'')])+'\n';
+    });
+    // Download
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(new Blob(['\ufeff'+allCsv],{type:'text/csv;charset=utf-8'}));
+    a.download='dabbawala_FULL_BACKUP_'+todayStr()+'.csv';
+    a.click();
+    logAudit('full_backup', 'Owner downloaded full backup');
+    if (btn) { btn.textContent='💾 Backup Everything'; btn.disabled=false; }
+  }).catch(function(e){
+    alert('Backup error: '+e.message);
+    if (btn) { btn.textContent='💾 Backup Everything'; btn.disabled=false; }
+  });
+}
+
 function doCSV() {
   if (!db) { alert('Not connected.'); return; }
   db.collection('orders').get().then(function(snap) {
