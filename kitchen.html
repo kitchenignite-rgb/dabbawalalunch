@@ -227,7 +227,7 @@ tbody tr:hover td{background:rgba(232,112,10,.04)}
     <button class="btn btn-b" onclick="doTest()">🔍 Test</button>
     <button class="btn btn-o" onclick="doLabels()">🏷️ Labels</button>
     <button class="btn btn-wa" onclick="doWA()">📲 WA Summary</button>
-    <button class="btn btn-g" onclick="doConfirmAll()">✅ Confirm All</button>
+    <button class="btn btn-g" onclick="doConfirmAll()">💰 Mark All Paid</button>
   </div>
 </nav>
 
@@ -255,10 +255,12 @@ tbody tr:hover td{background:rgba(232,112,10,.04)}
       <div class="pt">📋 Order Queue <span id="ocount" style="font-size:.7rem;color:rgba(255,255,255,.3);font-weight:400;margin-left:4px"></span></div>
       <div class="filters">
         <button class="flt active" onclick="setFilt('all',this)">All</button>
-        <button class="flt" onclick="setFilt('pending',this)">Pending</button>
-        <button class="flt" onclick="setFilt('confirmed',this)">Confirmed</button>
-        <button class="flt" onclick="setFilt('preparing',this)">Preparing</button>
-        <button class="flt" onclick="setFilt('delivered',this)">Delivered</button>
+        <button class="flt" onclick="setFilt('pending',this)">⏳ Pending</button>
+        <button class="flt" onclick="setFilt('paid',this)">💰 Paid</button>
+        <button class="flt" onclick="setFilt('preparing',this)">🍳 Preparing</button>
+        <button class="flt" onclick="setFilt('ready',this)">📦 Ready</button>
+        <button class="flt" onclick="setFilt('out',this)">🛵 Out</button>
+        <button class="flt" onclick="setFilt('delivered',this)">✅ Delivered</button>
       </div>
     </div>
     <div style="overflow-x:auto">
@@ -425,8 +427,19 @@ window.addEventListener('error', function(e) {
 // ============================================================
 
 var PRICE = 15.90;
-var SL = {pending:'⏳ Pending', confirmed:'✅ Confirmed', preparing:'🍳 Preparing', delivered:'🚚 Delivered'};
-var SF = ['pending','confirmed','preparing','delivered'];
+var SL = {
+  pending:'⏳ Pending',
+  paid:'💰 Paid',
+  preparing:'🍳 Preparing',
+  ready:'📦 Ready',
+  out:' van Out for Delivery',
+  delivered:'✅ Delivered'
+};
+// fix the emoji properly
+SL.out = '🛵 Out for Delivery';
+var SF = ['pending','paid','preparing','ready','out','delivered'];
+// CSS class per status (reuse existing styles, map new ones)
+var SC = {pending:'pending', paid:'confirmed', preparing:'preparing', ready:'confirmed', out:'preparing', delivered:'delivered'};
 var orders = [];
 var filt = 'all';
 var prevIds = [];
@@ -471,21 +484,29 @@ function getRoleForEmail(email) {
 // Hide financial data + sensitive tabs for the kitchen role
 function applyRolePermissions() {
   var isKitchen = (currentRole === 'kitchen');
-  var isDelivery = (currentRole === 'delivery');
-  // Tabs to hide from kitchen: Invoices, Reports, HR View (all show money)
-  var hideMoneyTabs = isKitchen || isDelivery;
+  var isLogistics = (currentRole === 'delivery');
+  // Hide money tabs from kitchen AND logistics (neither handles money)
+  var hideMoneyTabs = isKitchen || isLogistics;
   ['tab-invoices','tab-reports','tab-hr'].forEach(function(id){
     var el = document.getElementById(id);
     if (el) el.style.display = hideMoneyTabs ? 'none' : '';
   });
-  // KPI cards that show revenue - hide for kitchen/delivery
   if (hideMoneyTabs) {
     var rev = document.getElementById('kRev');
     if (rev) { var card = rev.closest('.kpi'); if (card) card.style.display = 'none'; }
-    // Hide WA Summary (contains revenue) for kitchen
     document.querySelectorAll('.btn-wa').forEach(function(b){ b.style.display='none'; });
   }
-  // mark body so CSS can hide price columns
+  // Logistics also can't verify payments or see prep tab; they focus on delivery
+  if (isLogistics) {
+    var prep = document.getElementById('tab-prep');
+    if (prep) prep.style.display = 'none';
+    // hide the "Mark All Paid" button for logistics
+    document.querySelectorAll('.btn-g').forEach(function(b){ b.style.display='none'; });
+  }
+  // Kitchen can't verify payment either - hide Mark All Paid
+  if (isKitchen) {
+    document.querySelectorAll('.btn-g').forEach(function(b){ b.style.display='none'; });
+  }
   document.body.setAttribute('data-role', currentRole);
 }
 
@@ -754,7 +775,7 @@ function renderTable() {
       '<td><strong>' + (o.qty||1) + '</strong></td>' +
       '<td style="font-size:.7rem;color:rgba(255,255,255,.45)">' + (o.deliveryDate||'-') + '</td>' +
       '<td style="font-size:.68rem;color:rgba(255,255,255,.38)">' + tm + '</td>' +
-      '<td><span class="stat ' + st + '" onclick="nextStat(\'' + o.id + '\',\'' + st + '\')">' + (SL[st]||st) + '</span></td>' +
+      '<td><span class="stat ' + (SC[st]||'pending') + '" onclick="nextStat(\'' + o.id + '\',\'' + st + '\')">' + (SL[st]||st) + '</span></td>' +
       '<td>' +
         '<button class="actbtn" title="Next Status" onclick="nextStat(\'' + o.id + '\',\'' + st + '\')">▶</button>' +
         '<button class="actbtn" title="Label" onclick="showLabel(\'' + o.id + '\')">🏷️</button>' +
@@ -817,8 +838,14 @@ function renderHR() {
 function nextStat(id, cur) {
   if (!db) return;
   var nx = SF[(SF.indexOf(cur)+1) % SF.length];
+  // RULE: only owner/finance can mark an order as Paid (payment verification).
+  // Kitchen cannot move pending -> paid (they don't handle money).
+  if (cur === 'pending' && nx === 'paid' && currentRole === 'kitchen') {
+    alert('Only the owner/admin can verify payment.\n\nThe kitchen should start cooking once an order shows "Paid".');
+    return;
+  }
   db.collection('orders').doc(id).update({status: nx})
-    .then(function(){ logAudit('order_status_changed', 'Order ' + id.slice(-6).toUpperCase() + ': ' + cur + ' -> ' + nx); })
+    .then(function(){ logAudit('order_status_changed', 'Order ' + id.slice(-6).toUpperCase() + ': ' + cur + ' -> ' + nx + ' (by ' + currentRole + ')'); })
     .catch(function(e) { alert('Error: '+e.message); });
 }
 
@@ -835,10 +862,12 @@ function delOrd(id) {
 
 function doConfirmAll() {
   if (!db) { alert('Not connected.'); return; }
+  if (currentRole === 'kitchen') { alert('Only owner/admin can verify payments.'); return; }
   var pending = orders.filter(function(o) { return o.status === 'pending'; });
-  if (!pending.length) { alert('No pending orders.'); return; }
-  pending.forEach(function(o) { db.collection('orders').doc(o.id).update({status:'confirmed'}); });
-  logAudit('orders_bulk_confirmed', pending.length + ' orders confirmed at once');
+  if (!pending.length) { alert('No pending orders to mark as paid.'); return; }
+  if (!confirm('Mark all ' + pending.length + ' pending orders as PAID?\n\nOnly do this after you have verified payment.')) return;
+  pending.forEach(function(o) { db.collection('orders').doc(o.id).update({status:'paid'}); });
+  logAudit('orders_bulk_paid', pending.length + ' orders marked paid at once');
 }
 
 function setFilt(f, el) {
@@ -1060,7 +1089,7 @@ function loadReport(range) {
         '<td><span class="mpill '+(o.meal&&o.meal.type||'')+'">'+(o.meal&&o.meal.icon||'')+' '+(o.meal&&o.meal.name||'?').substring(0,20)+'</span></td>' +
         '<td><strong>'+(o.qty||1)+'</strong></td>' +
         '<td style="color:var(--o);font-weight:700">RM '+((o.qty||1)*PRICE).toFixed(2)+'</td>' +
-        '<td><span class="stat '+(o.status||'pending')+'">'+(SL[o.status||'pending'])+'</span></td></tr>';
+        '<td><span class="stat '+(SC[o.status||'pending']||'pending')+'">'+(SL[o.status||'pending'])+'</span></td></tr>';
     }).join('') : '<tr><td colspan="8"><div class="empty">No orders in this period</div></td></tr>';
   }).catch(function(e){alert('Error: '+e.message);});
 }
@@ -1106,7 +1135,7 @@ function loadHistory() {
         '<td><span class="mpill '+(o.meal&&o.meal.type||'')+'">'+(o.meal&&o.meal.icon||'')+' '+(o.meal&&o.meal.name||'?').substring(0,20)+'</span></td>' +
         '<td><strong>'+(o.qty||1)+'</strong></td>' +
         '<td style="color:var(--o);font-weight:700">RM '+((o.qty||1)*PRICE).toFixed(2)+'</td>' +
-        '<td><span class="stat '+(o.status||'pending')+'">'+(SL[o.status||'pending'])+'</span></td></tr>';
+        '<td><span class="stat '+(SC[o.status||'pending']||'pending')+'">'+(SL[o.status||'pending'])+'</span></td></tr>';
     }).join(''):'<tr><td colspan="8"><div class="empty">No orders in this range</div></td></tr>';
   }).catch(function(e){alert('Error: '+e.message);});
 }
