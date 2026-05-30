@@ -464,9 +464,17 @@ footer{background:#0F1225;border-top:3px solid var(--red);padding:44px 5% 24px}
       <div class="cc-row"><span style="color:var(--grey)">Quantity</span><span style="font-weight:700;color:var(--navy)" id="ccQty">—</span></div>
       <div class="cc-row"><span style="color:var(--grey)">Delivery</span><span style="font-weight:700;color:var(--navy)" id="ccDate">—</span></div>
       <div class="cc-total"><span style="font-size:.78rem;font-weight:600;color:var(--grey)">Total Amount</span><span class="cc-total-val" id="ccTotal">RM 0.00</span></div>
+      <!-- PAYMENT QR SECTION -->
+      <div style="margin-top:14px;padding:16px;background:#F0FDF4;border:1px solid #86EFAC;border-radius:11px;text-align:center">
+        <div style="font-size:.8rem;font-weight:700;color:#15803D;margin-bottom:4px">💳 Scan to Pay</div>
+        <div style="font-size:.7rem;color:#6B7280;margin-bottom:12px">Pay <strong id="qrAmount">RM 0.00</strong> via DuitNow / online banking</div>
+        <img src="payment-qr.png" alt="Payment QR" style="width:180px;height:180px;object-fit:contain;border-radius:10px;background:#fff;padding:8px;border:1px solid #ddd" onerror="this.style.display='none';document.getElementById('qrFallback').style.display='block'">
+        <div id="qrFallback" style="display:none;padding:20px;color:#9CA3AF;font-size:.78rem">Payment QR will appear here.<br>Please contact us at 011 2679 4152 to pay.</div>
+        <div style="font-size:.66rem;color:#9CA3AF;margin-top:10px;line-height:1.6">After paying, your order is confirmed.<br>For corporate monthly billing, you'll receive an invoice instead.</div>
+      </div>
     </div>
     <div class="cc-actions">
-      <button class="cc-wa" id="ccWaBtn">💬 Send Confirmation via WhatsApp</button>
+      <button class="cc-wa" id="ccWaBtn">💬 Save My Order Details</button>
       <button class="cc-cancel" id="ccCancelBtn">❌ Cancel This Order</button>
       <div class="cancel-timer" id="cancelTimer">You can cancel within 30 minutes</div>
       <button class="cc-close" onclick="document.getElementById('confirmModal').classList.remove('show')">Close</button>
@@ -923,6 +931,7 @@ function showConfirm(orderId, name, company, dept, meal, icon, qty, date) {
   document.getElementById('ccQty').textContent = qty + ' portion' + (qty > 1 ? 's' : '');
   document.getElementById('ccDate').textContent = date;
   document.getElementById('ccTotal').textContent = 'RM ' + (qty * PRICE).toFixed(2);
+  var qrAmt = document.getElementById('qrAmount'); if (qrAmt) qrAmt.textContent = 'RM ' + (qty * PRICE).toFixed(2);
 
   var msg = encodeURIComponent(
     '✅ *Dabbawala Lunch — Order Confirmed!*\n\n' +
